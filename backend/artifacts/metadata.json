@@ -1,0 +1,41 @@
+{
+  "model": "hist_gradient_boosting",
+  "trained_at": "2026-09-19T16:15:01+00:00",
+  "dataset": "Health_Risk_Dataset.csv",
+  "n_rows": 1000,
+  "features": [
+    "Respiratory_Rate",
+    "Oxygen_Saturation",
+    "O2_Scale",
+    "Systolic_BP",
+    "Heart_Rate",
+    "Temperature",
+    "On_Oxygen",
+    "NEWS2_Total",
+    "NEWS2_Max_Component",
+    "NEWS2_Abnormal_Count",
+    "Consciousness"
+  ],
+  "classes": [
+    "High",
+    "Low",
+    "Medium",
+    "Normal"
+  ],
+  "risk_order": [
+    "Normal",
+    "Low",
+    "Medium",
+    "High"
+  ],
+  "cv_macro_f1": {
+    "logistic_regression": 0.9880009077667739,
+    "random_forest": 0.9956744536501091,
+    "hist_gradient_boosting": 1.0
+  },
+  "holdout": {
+    "accuracy": 1.0,
+    "macro_f1": 1.0,
+    "mean_bands_off": 0.0
+  }
+}
