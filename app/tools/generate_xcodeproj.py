@@ -27,6 +27,8 @@ SHARED_DIR = "Shared"
 IOS_BUNDLE_ID = "com.bayhacks.VitalSense"
 WATCH_BUNDLE_ID = f"{IOS_BUNDLE_ID}.watchkitapp"
 
+COREML_MODEL = "VitalRisk.mlmodel"
+
 IOS_DEPLOYMENT = "18.0"
 WATCH_DEPLOYMENT = "11.0"
 
@@ -74,6 +76,10 @@ def generate() -> str:
 
     if not ios_sources or not watch_sources or not shared_sources:
         raise SystemExit("Expected .swift files in all three source folders.")
+    if not (ROOT / SHARED_DIR / COREML_MODEL).exists():
+        raise SystemExit(
+            f"{SHARED_DIR}/{COREML_MODEL} is missing. Run `python model/train.py` first."
+        )
 
     # ---- file references -------------------------------------------------
     file_refs: dict[tuple[str, str], str] = {}
@@ -88,6 +94,19 @@ def generate() -> str:
             f"\t\t\tsourceTree = \"<group>\";\n",
             name,
         )
+
+    # The Core ML model is compiled (not copied) into each target, which is
+    # what turns VitalRisk.mlmodel into the VitalRisk.mlmodelc the apps load.
+    model_ref = uid("ref", SHARED_DIR, COREML_MODEL)
+    file_refs[(SHARED_DIR, COREML_MODEL)] = model_ref
+    p.add(
+        model_ref,
+        "PBXFileReference",
+        "\t\t\tlastKnownFileType = file.mlmodel;\n"
+        f"\t\t\tpath = {COREML_MODEL};\n"
+        "\t\t\tsourceTree = \"<group>\";\n",
+        COREML_MODEL,
+    )
 
     for folder in (IOS_DIR, WATCH_DIR):
         ref = uid("ref", folder, "Info.plist")
@@ -147,7 +166,9 @@ def generate() -> str:
     # Shared files are compiled into BOTH targets. That is the whole point of
     # the folder: one definition of the reading and the API client, two apps.
     ios_compile = [build_file(IOS_TARGET, f, n) for f, n in ios_sources + shared_sources]
+    ios_compile.append(build_file(IOS_TARGET, SHARED_DIR, COREML_MODEL))
     watch_compile = [build_file(WATCH_TARGET, f, n) for f, n in watch_sources + shared_sources]
+    watch_compile.append(build_file(WATCH_TARGET, SHARED_DIR, COREML_MODEL))
     ios_resources = [build_file(IOS_TARGET, IOS_DIR, "Assets.xcassets")]
     watch_resources = [build_file(WATCH_TARGET, WATCH_DIR, "Assets.xcassets")]
 
@@ -175,7 +196,7 @@ def generate() -> str:
 
     shared_group = group(
         uid("group", SHARED_DIR),
-        [file_refs[(SHARED_DIR, n)] for _, n in shared_sources],
+        [file_refs[(SHARED_DIR, n)] for _, n in shared_sources] + [model_ref],
         None,
         SHARED_DIR,
     )
@@ -271,6 +292,9 @@ def generate() -> str:
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
         "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
         "CODE_SIGN_STYLE": "Automatic",
+        # The apps load the model by URL rather than through a generated
+        # wrapper class, so there is no interface to generate.
+        "COREML_CODEGEN_LANGUAGE": "None",
         "CURRENT_PROJECT_VERSION": "1",
         "DEVELOPMENT_TEAM": '""',
         "ENABLE_PREVIEWS": "YES",

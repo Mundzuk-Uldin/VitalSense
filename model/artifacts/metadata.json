@@ -1,0 +1,76 @@
+{
+  "framework": "fastai",
+  "architecture": "tabular_learner, layers [64, 32], embedding for Consciousness",
+  "trained_at": "2026-09-19T18:17:01+00:00",
+  "dataset": "Health_Risk_Dataset.csv",
+  "n_rows": 1000,
+  "epochs": 30,
+  "continuous_features": [
+    "Respiratory_Rate",
+    "Oxygen_Saturation",
+    "O2_Scale",
+    "Systolic_BP",
+    "Heart_Rate",
+    "Temperature",
+    "On_Oxygen",
+    "NEWS2_Total",
+    "NEWS2_Max",
+    "NEWS2_Abnormal"
+  ],
+  "categorical_features": [
+    "Consciousness"
+  ],
+  "classes": [
+    "High",
+    "Low",
+    "Medium",
+    "Normal"
+  ],
+  "risk_order": [
+    "Normal",
+    "Low",
+    "Medium",
+    "High"
+  ],
+  "consciousness_map": {
+    "#na#": 0,
+    "A": 1,
+    "C": 2,
+    "P": 3,
+    "U": 4,
+    "V": 5
+  },
+  "normalisation": {
+    "note": "Baked into the exported graph; Swift passes raw values.",
+    "means": {
+      "Respiratory_Rate": 21.4525,
+      "Oxygen_Saturation": 92.64,
+      "O2_Scale": 1.12375,
+      "Systolic_BP": 105.8,
+      "Heart_Rate": 98.90125,
+      "Temperature": 37.917747,
+      "On_Oxygen": 0.27,
+      "NEWS2_Total": 5.925,
+      "NEWS2_Max": 1.955,
+      "NEWS2_Abnormal": 3.0625
+    },
+    "stds": {
+      "Respiratory_Rate": 5.232614,
+      "Oxygen_Saturation": 4.420453,
+      "O2_Scale": 0.329296,
+      "Systolic_BP": 18.033926,
+      "Heart_Rate": 19.863761,
+      "Temperature": 1.104405,
+      "On_Oxygen": 0.44396,
+      "NEWS2_Total": 4.990679,
+      "NEWS2_Max": 1.071436,
+      "NEWS2_Abnormal": 1.985219
+    }
+  },
+  "holdout": {
+    "accuracy": 0.995,
+    "macro_f1": 0.9953205632817284,
+    "mean_bands_off": 0.005,
+    "n": 200
+  }
+}

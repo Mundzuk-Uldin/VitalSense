@@ -1,17 +1,21 @@
 import Foundation
 
-/// Decoded `/predict` response.
-struct RiskPrediction: Codable, Hashable, Identifiable, Sendable {
-    var id: UUID { UUID() }
-
+/// What the on-device model said about one reading.
+///
+/// Built locally by `RiskScorer`. It stays `Codable` because it is persisted
+/// in the iPhone's history and sent from the watch to the phone over
+/// WatchConnectivity.
+struct RiskPrediction: Codable, Hashable, Sendable {
     let riskLevel: RiskLevel
     let confidence: Double
-    let probabilities: [String: Double]
+    let probabilities: [RiskLevel: Double]
 
     let news2Total: Int
-    let news2Band: String
+    let news2Band: RiskLevel
+    /// True when any single vital scores 3, which escalates on its own.
     let hasRedScore: Bool
 
+    /// All seven vitals, most concerning first.
     let riskFactors: [RiskFactor]
     let topFactors: [String]
     let recommendation: String
@@ -19,29 +23,21 @@ struct RiskPrediction: Codable, Hashable, Identifiable, Sendable {
     let modelVersion: String
     let predictedAt: Date
 
-    enum CodingKeys: String, CodingKey {
-        case riskLevel = "risk_level"
-        case confidence
-        case probabilities
-        case news2Total = "news2_total"
-        case news2Band = "news2_band"
-        case hasRedScore = "has_red_score"
-        case riskFactors = "risk_factors"
-        case topFactors = "top_factors"
-        case recommendation
-        case modelVersion = "model_version"
-        case predictedAt = "predicted_at"
-    }
-
     /// Probabilities in clinical order rather than dictionary order, so the
-    /// bar chart does not reshuffle itself between readings.
+    /// chart does not reshuffle itself between readings.
     var orderedProbabilities: [(level: RiskLevel, probability: Double)] {
-        RiskLevel.allCases.map { ($0, probabilities[$0.rawValue] ?? 0) }
+        RiskLevel.allCases.map { ($0, probabilities[$0] ?? 0) }
     }
 
-    /// Only the vitals that actually contributed points.
     var contributingFactors: [RiskFactor] {
         riskFactors.filter { $0.score > 0 }
+    }
+
+    /// True when the model's answer differs from the published NEWS2
+    /// banding. Rare, and worth surfacing rather than hiding: it means the
+    /// model learned something the rulebook does not encode.
+    var disagreesWithRulebook: Bool {
+        riskLevel != news2Band
     }
 }
 
@@ -51,8 +47,7 @@ enum RiskLevel: String, Codable, CaseIterable, Hashable, Sendable {
     case medium = "Medium"
     case high = "High"
 
-    /// Ascending acuity, used to order the probability chart and to decide
-    /// whether a new reading is worse than the last one.
+    /// Ascending acuity.
     var severity: Int {
         switch self {
         case .normal: return 0
@@ -72,6 +67,26 @@ enum RiskLevel: String, Codable, CaseIterable, Hashable, Sendable {
     }
 }
 
+/// Lets `[RiskLevel: Double]` encode as a normal JSON object keyed by name.
+/// Without this, Swift falls back to a flat alternating array, which still
+/// round-trips but is horrible to read in a stored history.
+extension RiskLevel: CodingKeyRepresentable {
+    public var codingKey: any CodingKey {
+        StringCodingKey(stringValue: rawValue)
+    }
+
+    public init?<T: CodingKey>(codingKey: T) {
+        self.init(rawValue: codingKey.stringValue)
+    }
+}
+
+struct StringCodingKey: CodingKey {
+    var stringValue: String
+    var intValue: Int? { nil }
+    init(stringValue: String) { self.stringValue = stringValue }
+    init?(intValue: Int) { nil }
+}
+
 struct RiskFactor: Codable, Hashable, Identifiable, Sendable {
     var id: String { name }
 
@@ -82,27 +97,10 @@ struct RiskFactor: Codable, Hashable, Identifiable, Sendable {
     let score: Int
     let severity: Severity
     let note: String
-
-    enum CodingKeys: String, CodingKey {
-        case name, label, value, score, severity, note
-        case displayValue = "display_value"
-    }
+    let symbolName: String
 
     enum Severity: String, Codable, Hashable, Sendable {
         case normal, mild, moderate, severe
-    }
-
-    var symbolName: String {
-        switch name {
-        case "heart_rate": return "heart.fill"
-        case "oxygen_saturation": return "lungs.fill"
-        case "respiratory_rate": return "wind"
-        case "temperature": return "thermometer.medium"
-        case "systolic_bp": return "gauge.with.dots.needle.33percent"
-        case "consciousness": return "brain.head.profile"
-        case "on_oxygen": return "facemask.fill"
-        default: return "waveform.path.ecg"
-        }
     }
 }
 
@@ -112,7 +110,7 @@ struct ScoredReading: Codable, Hashable, Identifiable, Sendable {
     var id: UUID { reading.id }
     var reading: VitalsReading
     var prediction: RiskPrediction?
-    /// Set when the reading arrived but scoring failed, so the history can
-    /// show the reading with an honest error instead of dropping it.
+    /// Set when a reading arrived but scoring failed, so the history can show
+    /// it with an honest reason instead of dropping it.
     var failure: String?
 }

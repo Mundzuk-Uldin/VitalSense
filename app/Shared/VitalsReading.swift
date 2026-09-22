@@ -107,22 +107,6 @@ struct VitalsReading: Codable, Hashable, Identifiable, Sendable {
         return names
     }
 
-    /// The payload shape the FastAPI `/predict` endpoint expects.
-    func apiPayload() -> [String: Any] {
-        [
-            "respiratory_rate": respiratoryRate.value,
-            "oxygen_saturation": oxygenSaturation.value,
-            "heart_rate": heartRate.value,
-            "temperature": temperature.value,
-            "systolic_bp": systolicBP.value,
-            "o2_scale": o2Scale,
-            "consciousness": consciousness.rawValue,
-            "on_oxygen": onOxygen,
-            "source": source,
-            "recorded_at": ISO8601DateFormatter().string(from: recordedAt),
-        ]
-    }
-
     /// A plausible reading, used by the on-watch demo mode and by SwiftUI
     /// previews. The Simulator has no HealthKit data at all, so without this
     /// there is nothing to show until you are on a real wrist.

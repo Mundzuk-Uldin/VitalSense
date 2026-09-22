@@ -1,0 +1,4 @@
+# Requires Python 3.11+ (developed on Homebrew's 3.14).
+fastai>=2.8
+coremltools>=9.0
+pandas>=2.2

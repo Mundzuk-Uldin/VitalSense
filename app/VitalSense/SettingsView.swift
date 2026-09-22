@@ -2,39 +2,21 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject private var store: RiskStore
-    @State private var draftURL = ""
-    @State private var reachability: Reachability = .unknown
-
-    private enum Reachability {
-        case unknown, checking, reachable, unreachable
-    }
-
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("http://192.168.1.10:8000", text: $draftURL)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled()
-                        .keyboardType(.URL)
-                        .onSubmit(commit)
-
-                    Button("Save and test") { commit() }
-
-                    LabeledContent("Status") {
-                        switch reachability {
-                        case .unknown: Text("Not tested").foregroundStyle(.secondary)
-                        case .checking: ProgressView()
-                        case .reachable: Label("Reachable", systemImage: "checkmark.circle.fill")
-                                .foregroundStyle(RiskLevel.normal.tint)
-                        case .unreachable: Label("No answer", systemImage: "xmark.circle.fill")
-                                .foregroundStyle(RiskLevel.high.tint)
-                        }
+                    LabeledContent("Scoring", value: "On this device")
+                    LabeledContent("Model", value: store.modelVersion)
+                    if let error = store.modelError {
+                        Label(error, systemImage: "exclamationmark.triangle.fill")
+                            .font(.footnote)
+                            .foregroundStyle(RiskLevel.high.tint)
                     }
                 } header: {
-                    Text("Risk server")
+                    Text("Risk model")
                 } footer: {
-                    Text("The Simulator can use localhost. A real iPhone needs your Mac's address on the same Wi-Fi — run `ipconfig getifaddr en0` on the Mac to find it.")
+                    Text("The model runs inside the app. There is no server, no network request and no account — readings never leave your devices.")
                 }
 
                 Section("Apple Watch") {
@@ -63,21 +45,6 @@ struct SettingsView: View {
                 }
             }
             .navigationTitle("Settings")
-            .onAppear { draftURL = store.apiBaseURL }
-        }
-    }
-
-    private func commit() {
-        let trimmed = draftURL.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return }
-        store.apiBaseURL = trimmed
-        reachability = .checking
-        Task {
-            guard let client = RiskAPIClient(rawBaseURL: trimmed) else {
-                reachability = .unreachable
-                return
-            }
-            reachability = await client.ping() ? .reachable : .unreachable
         }
     }
 }

@@ -1,15 +1,13 @@
 import Foundation
 
-/// Settings that both apps read, and the keys they are stored under.
+/// Keys the apps store settings under.
+///
+/// There is no server address here any more: the model runs on the device,
+/// so there is nothing to configure before the app works.
 enum AppSettings {
-    /// Where the FastAPI service lives. `localhost` is right for the iOS
-    /// Simulator, which shares the Mac's network stack; a real iPhone needs
-    /// the Mac's LAN address, which the user sets on the Settings screen.
-    static let defaultAPIBaseURL = "http://localhost:8000"
-
     enum Key {
-        static let apiBaseURL = "apiBaseURL"
         static let systolicBP = "manualSystolicBP"
+        static let hasManualBP = "hasManualBP"
         static let consciousness = "manualConsciousness"
         static let onOxygen = "manualOnOxygen"
         static let o2Scale = "manualO2Scale"

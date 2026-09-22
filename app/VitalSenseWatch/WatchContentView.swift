@@ -5,6 +5,9 @@ import SwiftUI
 /// The screen is too small for a chart, so the result page is a hero readout
 /// rather than a plot -- the level, its icon and its name, and the single
 /// biggest driver. Everything finer belongs on the iPhone.
+///
+/// Scoring happens here on the watch, so the answer arrives without waiting
+/// on the phone or a network.
 struct WatchContentView: View {
     @EnvironmentObject private var collector: VitalsCollector
     @EnvironmentObject private var connectivity: WatchSessionManager
@@ -24,11 +27,12 @@ struct WatchContentView: View {
 private struct ResultPage: View {
     @EnvironmentObject private var collector: VitalsCollector
     @EnvironmentObject private var connectivity: WatchSessionManager
+    @EnvironmentObject private var scoreModel: WatchScoreModel
 
     var body: some View {
         ScrollView {
             VStack(spacing: 10) {
-                if let prediction = connectivity.prediction {
+                if let prediction = scoreModel.prediction {
                     RiskHero(prediction: prediction)
                 } else {
                     VStack(spacing: 6) {
@@ -48,24 +52,24 @@ private struct ResultPage: View {
                 Button {
                     Task {
                         await collector.refreshPassiveVitals()
-                        await connectivity.send(collector.reading)
+                        scoreModel.score(collector.reading, syncingWith: connectivity)
                     }
                 } label: {
-                    if connectivity.isSending {
+                    if scoreModel.isScoring {
                         ProgressView()
                     } else {
                         Label("Read & Score", systemImage: "arrow.clockwise.heart")
                     }
                 }
-                .disabled(connectivity.isSending)
+                .disabled(scoreModel.isScoring)
 
-                if let error = connectivity.errorMessage {
+                if let error = scoreModel.errorMessage {
                     Text(error)
                         .font(.caption2)
                         .foregroundStyle(.red)
                         .multilineTextAlignment(.center)
-                } else if !connectivity.statusMessage.isEmpty {
-                    Text(connectivity.statusMessage)
+                } else if !scoreModel.statusMessage.isEmpty {
+                    Text(scoreModel.statusMessage)
                         .font(.caption2)
                         .foregroundStyle(.secondary)
                 }
@@ -187,6 +191,7 @@ private struct VitalRow: View {
 private struct ControlsPage: View {
     @EnvironmentObject private var collector: VitalsCollector
     @EnvironmentObject private var connectivity: WatchSessionManager
+    @EnvironmentObject private var scoreModel: WatchScoreModel
 
     var body: some View {
         ScrollView {
@@ -209,8 +214,10 @@ private struct ControlsPage: View {
                     .font(.caption2)
                     .foregroundStyle(.secondary)
 
+                // The phone only receives history. Scoring never depends on
+                // it, so being out of range is information, not a problem.
                 Label(
-                    connectivity.isPhoneReachable ? "iPhone connected" : "iPhone out of range",
+                    connectivity.isPhoneReachable ? "Syncing to iPhone" : "iPhone out of range",
                     systemImage: connectivity.isPhoneReachable ? "iphone.radiowaves.left.and.right" : "iphone.slash"
                 )
                 .font(.caption2)
@@ -224,7 +231,7 @@ private struct ControlsPage: View {
                 ForEach(["Normal", "Medium", "High"], id: \.self) { risk in
                     Button(risk) {
                         collector.loadDemoReading(risk: risk)
-                        Task { await connectivity.send(collector.reading) }
+                        scoreModel.score(collector.reading, syncingWith: connectivity)
                     }
                     .font(.caption)
                 }

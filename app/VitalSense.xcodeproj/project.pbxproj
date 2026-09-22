@@ -3,215 +3,208 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 63;
+	objectVersion = 56;
 	objects = {
-
-/* Begin PBXBuildFile section */
-		01E7B1FF23B72F5573AD47A9 /* RiskPrediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81D6AF2A1CECADA36AE1382 /* RiskPrediction.swift */; };
-		03C54D7344BB37C00A9C813A /* RiskPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76930DD2A79A1B0E3256F2A /* RiskPalette.swift */; };
-		30CDB8D6E3C690AB6B2E1E1E /* WatchContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D87B49A0D2463CD61E0AEAF /* WatchContentView.swift */; };
-		32F61180FD53CA04C25C8D0B /* ConnectivityPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577C0F29F2AE419B27F7ABDA /* ConnectivityPayload.swift */; };
-		3AA45FB5B894C1F978309C6A /* RiskPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = D76930DD2A79A1B0E3256F2A /* RiskPalette.swift */; };
-		3C482F40AF90D4520D12610B /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E70FA91EB4A88369208CAA4 /* AppSettings.swift */; };
-		3E796EB8E76FEF6EBFABB518 /* RiskStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6718DDEEFEBF5E2EA129ED70 /* RiskStore.swift */; };
-		4359B79DBBBD038EE1ACA001 /* VitalSense Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 6EB14DAC5B81B1B63E9B9B84 /* VitalSense Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		4E30A06380400E3FB6C2B8B5 /* RiskAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511443895E51A8C44F18F1E7 /* RiskAPIClient.swift */; };
-		4E525355BC8838064F271EC6 /* LatestReadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59F6C14A055879251B4C03BC /* LatestReadingView.swift */; };
-		5BE84168B66EA83EF951FE6C /* VitalsReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D1FF85D959C95948C5E232 /* VitalsReading.swift */; };
-		612C6CB73BC05870F08B362D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73EDAF36D0020773016B388A /* SettingsView.swift */; };
-		630F3B70AC21CF7C8E2CBFFE /* RiskPrediction.swift in Sources */ = {isa = PBXBuildFile; fileRef = E81D6AF2A1CECADA36AE1382 /* RiskPrediction.swift */; };
-		77932CE6A76A0A42261B4D5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A72954F752997EAE36F8D8F /* Assets.xcassets */; };
-		7A4DC4C98B1A7F9C53BA1492 /* VitalsCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22FFB67835DBC99E9256EDC4 /* VitalsCollector.swift */; };
-		8B99BB637A40389B3822924B /* ConnectivityPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 577C0F29F2AE419B27F7ABDA /* ConnectivityPayload.swift */; };
-		93D8E7404ECDCD22145D7729 /* ProbabilityChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C27477A10F0ECC245FAA8B /* ProbabilityChart.swift */; };
-		A2855E4B1D8E826361DC7106 /* VitalsReading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13D1FF85D959C95948C5E232 /* VitalsReading.swift */; };
-		A5540E62A54EF3DEE05A561E /* WatchSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04417AC7D9F20CC485E46735 /* WatchSessionManager.swift */; };
-		ADBEDB8A89DC9C39DEB9A395 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D5D07942BE5BC99326B48B6F /* Assets.xcassets */; };
-		C69B3A1F4BB01B9C8B66CFF8 /* VitalSenseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7DD5CE84050EB5A29F6B060 /* VitalSenseApp.swift */; };
-		D50994365C444E7A4A131A71 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 063C9E4567A8A3CCB697DD3B /* ContentView.swift */; };
-		D5F51E1F8224CDDCC2E42638 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E70FA91EB4A88369208CAA4 /* AppSettings.swift */; };
-		D750BBA11A9791A46385C585 /* ManualVitalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E976418B744A34E226EE9812 /* ManualVitalsView.swift */; };
-		DB6D05DA354B9F093864F6CE /* RiskAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 511443895E51A8C44F18F1E7 /* RiskAPIClient.swift */; };
-		E5111A2E215B0A5ED7DCB371 /* HistoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40747BCEA37E88B214D38E4C /* HistoryView.swift */; };
-		F18F3D7AEFCEBD7C5DF4C20F /* VitalSenseWatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11706703BF873125DC4AA40F /* VitalSenseWatchApp.swift */; };
-		FC0707DACDB7DF88121E8173 /* PhoneSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823C17410A8D62E3706C6875 /* PhoneSessionManager.swift */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		A75168C3711EA43AE36F57B7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3E7CBCC7D729FAC0D11859D3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 907A148760E1039757BCB6FB;
-			remoteInfo = "VitalSense Watch App";
+		01E7B1FF23B72F5573AD47A9 /* RiskPrediction.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = E81D6AF2A1CECADA36AE1382 /* RiskPrediction.swift */;
 		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		2496BDAAAB2FD4281F320C88 /* Embed Watch Content */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
-			dstSubfolderSpec = 16;
-			files = (
-				4359B79DBBBD038EE1ACA001 /* VitalSense Watch App.app in Embed Watch Content */,
-			);
-			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
+		034331FB5E5A2511AC757D40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COREML_CODEGEN_LANGUAGE = None;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = VitalSenseWatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = VitalSense;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/Frameworks");
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bayhacks.VitalSense.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "watchos watchsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "4";
+				WATCHOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
 		};
-/* End PBXCopyFilesBuildPhase section */
-
-/* Begin PBXFileReference section */
-		04417AC7D9F20CC485E46735 /* WatchSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchSessionManager.swift; sourceTree = "<group>"; };
-		063C9E4567A8A3CCB697DD3B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		11706703BF873125DC4AA40F /* VitalSenseWatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalSenseWatchApp.swift; sourceTree = "<group>"; };
-		13D1FF85D959C95948C5E232 /* VitalsReading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsReading.swift; sourceTree = "<group>"; };
-		1D87B49A0D2463CD61E0AEAF /* WatchContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchContentView.swift; sourceTree = "<group>"; };
-		22FFB67835DBC99E9256EDC4 /* VitalsCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalsCollector.swift; sourceTree = "<group>"; };
-		2E70FA91EB4A88369208CAA4 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
-		3CC5F77F412AF00E2514D009 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40747BCEA37E88B214D38E4C /* HistoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryView.swift; sourceTree = "<group>"; };
-		511443895E51A8C44F18F1E7 /* RiskAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskAPIClient.swift; sourceTree = "<group>"; };
-		577C0F29F2AE419B27F7ABDA /* ConnectivityPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectivityPayload.swift; sourceTree = "<group>"; };
-		59F6C14A055879251B4C03BC /* LatestReadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LatestReadingView.swift; sourceTree = "<group>"; };
-		6521EFD8862BB6DAB9B9C743 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6718DDEEFEBF5E2EA129ED70 /* RiskStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskStore.swift; sourceTree = "<group>"; };
-		6EB14DAC5B81B1B63E9B9B84 /* VitalSense Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VitalSense Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		73EDAF36D0020773016B388A /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		7A72954F752997EAE36F8D8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		823C17410A8D62E3706C6875 /* PhoneSessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneSessionManager.swift; sourceTree = "<group>"; };
-		95C27477A10F0ECC245FAA8B /* ProbabilityChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProbabilityChart.swift; sourceTree = "<group>"; };
-		B3CB8697E6440A11A15CC3C4 /* VitalSense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VitalSense.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C7DD5CE84050EB5A29F6B060 /* VitalSenseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VitalSenseApp.swift; sourceTree = "<group>"; };
-		D5D07942BE5BC99326B48B6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		D76930DD2A79A1B0E3256F2A /* RiskPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskPalette.swift; sourceTree = "<group>"; };
-		E81D6AF2A1CECADA36AE1382 /* RiskPrediction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskPrediction.swift; sourceTree = "<group>"; };
-		E976418B744A34E226EE9812 /* ManualVitalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualVitalsView.swift; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		7EA8843A24977B0BA8E2C62E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
+		03C54D7344BB37C00A9C813A /* RiskPalette.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = D76930DD2A79A1B0E3256F2A /* RiskPalette.swift */;
 		};
-		93112BEE249236E245E7098F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
+		04417AC7D9F20CC485E46735 /* WatchSessionManager.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = WatchSessionManager.swift;
+			sourceTree = "<group>";
 		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
+		063C9E4567A8A3CCB697DD3B /* ContentView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = ContentView.swift;
+			sourceTree = "<group>";
+		};
+		085A4733BBE4AB295F9B7566 /* VitalRisk.mlmodel in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 8F77BB1176B436414E38520C /* VitalRisk.mlmodel */;
+		};
 		0BE091DA3006EF7CF6F83C84 = {
 			isa = PBXGroup;
 			children = (
-				510489EBC5593C781BF1FE60 /* Shared */,
-				FAB44BDCCAC915C76587CE6F /* VitalSense */,
-				C521DBE741A7EF4C09C04B2D /* VitalSenseWatch */,
-				43931CF8D8FF624E4C75AE32 /* Products */,
+				510489EBC5593C781BF1FE60,
+				FAB44BDCCAC915C76587CE6F,
+				C521DBE741A7EF4C09C04B2D,
+				43931CF8D8FF624E4C75AE32,
 			);
 			sourceTree = "<group>";
 		};
-		43931CF8D8FF624E4C75AE32 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B3CB8697E6440A11A15CC3C4 /* VitalSense.app */,
-				6EB14DAC5B81B1B63E9B9B84 /* VitalSense Watch App.app */,
-			);
-			name = Products;
+		11706703BF873125DC4AA40F /* VitalSenseWatchApp.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = VitalSenseWatchApp.swift;
 			sourceTree = "<group>";
 		};
-		510489EBC5593C781BF1FE60 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				2E70FA91EB4A88369208CAA4 /* AppSettings.swift */,
-				577C0F29F2AE419B27F7ABDA /* ConnectivityPayload.swift */,
-				511443895E51A8C44F18F1E7 /* RiskAPIClient.swift */,
-				D76930DD2A79A1B0E3256F2A /* RiskPalette.swift */,
-				E81D6AF2A1CECADA36AE1382 /* RiskPrediction.swift */,
-				13D1FF85D959C95948C5E232 /* VitalsReading.swift */,
-			);
-			path = Shared;
+		12B2A35F87BA6EBBEECB6467 /* RiskScorer.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = C98F66938AC240CF1777E10D /* RiskScorer.swift */;
+		};
+		13D1FF85D959C95948C5E232 /* VitalsReading.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = VitalsReading.swift;
 			sourceTree = "<group>";
 		};
-		C521DBE741A7EF4C09C04B2D /* VitalSenseWatch */ = {
-			isa = PBXGroup;
-			children = (
-				11706703BF873125DC4AA40F /* VitalSenseWatchApp.swift */,
-				22FFB67835DBC99E9256EDC4 /* VitalsCollector.swift */,
-				1D87B49A0D2463CD61E0AEAF /* WatchContentView.swift */,
-				04417AC7D9F20CC485E46735 /* WatchSessionManager.swift */,
-				7A72954F752997EAE36F8D8F /* Assets.xcassets */,
-				6521EFD8862BB6DAB9B9C743 /* Info.plist */,
+		1840CE4A50E4D0EF83627166 /* VitalSense Watch App */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E972DFC4B4D47F0AF42916B /* Debug */,
+				034331FB5E5A2511AC757D40 /* Release */,
 			);
-			path = VitalSenseWatch;
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1BBD08D9CF474C0B44D801D3 /* NEWS2.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 5E5C2DD5CBFF9DC4CA4BD38C /* NEWS2.swift */;
+		};
+		1D87B49A0D2463CD61E0AEAF /* WatchContentView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = WatchContentView.swift;
 			sourceTree = "<group>";
 		};
-		FAB44BDCCAC915C76587CE6F /* VitalSense */ = {
-			isa = PBXGroup;
-			children = (
-				063C9E4567A8A3CCB697DD3B /* ContentView.swift */,
-				40747BCEA37E88B214D38E4C /* HistoryView.swift */,
-				59F6C14A055879251B4C03BC /* LatestReadingView.swift */,
-				E976418B744A34E226EE9812 /* ManualVitalsView.swift */,
-				823C17410A8D62E3706C6875 /* PhoneSessionManager.swift */,
-				95C27477A10F0ECC245FAA8B /* ProbabilityChart.swift */,
-				6718DDEEFEBF5E2EA129ED70 /* RiskStore.swift */,
-				73EDAF36D0020773016B388A /* SettingsView.swift */,
-				C7DD5CE84050EB5A29F6B060 /* VitalSenseApp.swift */,
-				D5D07942BE5BC99326B48B6F /* Assets.xcassets */,
-				3CC5F77F412AF00E2514D009 /* Info.plist */,
+		2257D320BD3B97041FB4A222 /* PBXResourcesBuildPhase */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADBEDB8A89DC9C39DEB9A395,
 			);
-			path = VitalSense;
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		22FFB67835DBC99E9256EDC4 /* VitalsCollector.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = VitalsCollector.swift;
 			sourceTree = "<group>";
 		};
-/* End PBXGroup section */
-
-/* Begin PBXNativeTarget section */
-		907A148760E1039757BCB6FB /* VitalSense Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 1840CE4A50E4D0EF83627166 /* Build configuration list for PBXNativeTarget "VitalSense Watch App" */;
-			buildPhases = (
-				E42078E6C2D7A01D2C621913 /* Sources */,
-				93112BEE249236E245E7098F /* Frameworks */,
-				4D004F4EB8B1FB6B89D3BA75 /* Resources */,
+		2496BDAAAB2FD4281F320C88 /* PBXCopyFilesBuildPhase */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4359B79DBBBD038EE1ACA001,
 			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "VitalSense Watch App";
-			productName = "VitalSense Watch App";
-			productReference = 6EB14DAC5B81B1B63E9B9B84 /* VitalSense Watch App.app */;
-			productType = "com.apple.product-type.application";
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F4D114F52683602D57C691B7 /* VitalSense */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8EDE5E05DA1F5BF282011CE4 /* Build configuration list for PBXNativeTarget "VitalSense" */;
-			buildPhases = (
-				2EDCBDF8D84ED988021600CE /* Sources */,
-				7EA8843A24977B0BA8E2C62E /* Frameworks */,
-				2257D320BD3B97041FB4A222 /* Resources */,
-				2496BDAAAB2FD4281F320C88 /* Embed Watch Content */,
+		26E84C2B3712F7DFAC8AD93F /* project */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				70DCC1EB255A5F3C8D9ED349 /* Debug */,
+				C3DCEEC1E0EB17A5583B8E94 /* Release */,
 			);
-			buildRules = (
-			);
-			dependencies = (
-				395B9292F3DFD20D5FAE6146 /* PBXTargetDependency */,
-			);
-			name = VitalSense;
-			productName = VitalSense;
-			productReference = B3CB8697E6440A11A15CC3C4 /* VitalSense.app */;
-			productType = "com.apple.product-type.application";
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
+		2E0907F76317A7A4175DA505 /* NEWS2.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 5E5C2DD5CBFF9DC4CA4BD38C /* NEWS2.swift */;
+		};
+		2E70FA91EB4A88369208CAA4 /* AppSettings.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = AppSettings.swift;
+			sourceTree = "<group>";
+		};
+		2EDCBDF8D84ED988021600CE /* PBXSourcesBuildPhase */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D50994365C444E7A4A131A71,
+				E5111A2E215B0A5ED7DCB371,
+				4E525355BC8838064F271EC6,
+				D750BBA11A9791A46385C585,
+				FC0707DACDB7DF88121E8173,
+				93D8E7404ECDCD22145D7729,
+				3E796EB8E76FEF6EBFABB518,
+				612C6CB73BC05870F08B362D,
+				C69B3A1F4BB01B9C8B66CFF8,
+				D5F51E1F8224CDDCC2E42638,
+				8B99BB637A40389B3822924B,
+				2E0907F76317A7A4175DA505,
+				3AA45FB5B894C1F978309C6A,
+				630F3B70AC21CF7C8E2CBFFE,
+				6239D7E39F4E6174FC833394,
+				A2855E4B1D8E826361DC7106,
+				085A4733BBE4AB295F9B7566,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		30CDB8D6E3C690AB6B2E1E1E /* WatchContentView.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 1D87B49A0D2463CD61E0AEAF /* WatchContentView.swift */;
+		};
+		32F61180FD53CA04C25C8D0B /* ConnectivityPayload.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 577C0F29F2AE419B27F7ABDA /* ConnectivityPayload.swift */;
+		};
+		395B9292F3DFD20D5FAE6146 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 907A148760E1039757BCB6FB;
+			targetProxy = A75168C3711EA43AE36F57B7;
+		};
+		3A12B3B9B4475231B83BD9B6 /* WatchScoreModel.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = WatchScoreModel.swift;
+			sourceTree = "<group>";
+		};
+		3AA45FB5B894C1F978309C6A /* RiskPalette.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = D76930DD2A79A1B0E3256F2A /* RiskPalette.swift */;
+		};
+		3C482F40AF90D4520D12610B /* AppSettings.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 2E70FA91EB4A88369208CAA4 /* AppSettings.swift */;
+		};
+		3CC5F77F412AF00E2514D009 /* Info.plist */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			path = Info.plist;
+			sourceTree = "<group>";
+		};
+		3E796EB8E76FEF6EBFABB518 /* RiskStore.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 6718DDEEFEBF5E2EA129ED70 /* RiskStore.swift */;
+		};
 		3E7CBCC7D729FAC0D11859D3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
@@ -219,15 +212,11 @@
 				LastSwiftUpdateCheck = 2700;
 				LastUpgradeCheck = 2700;
 				TargetAttributes = {
-					907A148760E1039757BCB6FB = {
-						CreatedOnToolsVersion = 27.0;
-					};
-					F4D114F52683602D57C691B7 = {
-						CreatedOnToolsVersion = 27.0;
-					};
+					F4D114F52683602D57C691B7 = {CreatedOnToolsVersion = 27.0;};
+					907A148760E1039757BCB6FB = {CreatedOnToolsVersion = 27.0;};
 				};
 			};
-			buildConfigurationList = 26E84C2B3712F7DFAC8AD93F /* Build configuration list for PBXProject "VitalSense" */;
+			buildConfigurationList = 26E84C2B3712F7DFAC8AD93F;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -237,113 +226,33 @@
 			);
 			mainGroup = 0BE091DA3006EF7CF6F83C84;
 			minimizedProjectReferenceProxies = 1;
-			productRefGroup = 43931CF8D8FF624E4C75AE32 /* Products */;
+			productRefGroup = 43931CF8D8FF624E4C75AE32;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F4D114F52683602D57C691B7 /* VitalSense */,
-				907A148760E1039757BCB6FB /* VitalSense Watch App */,
+				F4D114F52683602D57C691B7,
+				907A148760E1039757BCB6FB,
 			);
 		};
-/* End PBXProject section */
-
-/* Begin PBXResourcesBuildPhase section */
-		2257D320BD3B97041FB4A222 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				ADBEDB8A89DC9C39DEB9A395 /* Assets.xcassets in Resources */,
+		40747BCEA37E88B214D38E4C /* HistoryView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = HistoryView.swift;
+			sourceTree = "<group>";
+		};
+		4359B79DBBBD038EE1ACA001 /* VitalSense Watch App.app in Embed Watch Content */ = {
+			isa = PBXBuildFile;
+			fileRef = 6EB14DAC5B81B1B63E9B9B84 /* VitalSense Watch App.app */;
+			settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); };
+		};
+		43931CF8D8FF624E4C75AE32 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B3CB8697E6440A11A15CC3C4,
+				6EB14DAC5B81B1B63E9B9B84,
 			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4D004F4EB8B1FB6B89D3BA75 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				77932CE6A76A0A42261B4D5A /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
-/* Begin PBXSourcesBuildPhase section */
-		2EDCBDF8D84ED988021600CE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D50994365C444E7A4A131A71 /* ContentView.swift in Sources */,
-				E5111A2E215B0A5ED7DCB371 /* HistoryView.swift in Sources */,
-				4E525355BC8838064F271EC6 /* LatestReadingView.swift in Sources */,
-				D750BBA11A9791A46385C585 /* ManualVitalsView.swift in Sources */,
-				FC0707DACDB7DF88121E8173 /* PhoneSessionManager.swift in Sources */,
-				93D8E7404ECDCD22145D7729 /* ProbabilityChart.swift in Sources */,
-				3E796EB8E76FEF6EBFABB518 /* RiskStore.swift in Sources */,
-				612C6CB73BC05870F08B362D /* SettingsView.swift in Sources */,
-				C69B3A1F4BB01B9C8B66CFF8 /* VitalSenseApp.swift in Sources */,
-				D5F51E1F8224CDDCC2E42638 /* AppSettings.swift in Sources */,
-				8B99BB637A40389B3822924B /* ConnectivityPayload.swift in Sources */,
-				DB6D05DA354B9F093864F6CE /* RiskAPIClient.swift in Sources */,
-				3AA45FB5B894C1F978309C6A /* RiskPalette.swift in Sources */,
-				630F3B70AC21CF7C8E2CBFFE /* RiskPrediction.swift in Sources */,
-				A2855E4B1D8E826361DC7106 /* VitalsReading.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E42078E6C2D7A01D2C621913 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F18F3D7AEFCEBD7C5DF4C20F /* VitalSenseWatchApp.swift in Sources */,
-				7A4DC4C98B1A7F9C53BA1492 /* VitalsCollector.swift in Sources */,
-				30CDB8D6E3C690AB6B2E1E1E /* WatchContentView.swift in Sources */,
-				A5540E62A54EF3DEE05A561E /* WatchSessionManager.swift in Sources */,
-				3C482F40AF90D4520D12610B /* AppSettings.swift in Sources */,
-				32F61180FD53CA04C25C8D0B /* ConnectivityPayload.swift in Sources */,
-				4E30A06380400E3FB6C2B8B5 /* RiskAPIClient.swift in Sources */,
-				03C54D7344BB37C00A9C813A /* RiskPalette.swift in Sources */,
-				01E7B1FF23B72F5573AD47A9 /* RiskPrediction.swift in Sources */,
-				5BE84168B66EA83EF951FE6C /* VitalsReading.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		395B9292F3DFD20D5FAE6146 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 907A148760E1039757BCB6FB /* VitalSense Watch App */;
-			targetProxy = A75168C3711EA43AE36F57B7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin XCBuildConfiguration section */
-		034331FB5E5A2511AC757D40 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VitalSenseWatch/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = VitalSense;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.bayhacks.VitalSense.watchkitapp;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "watchos watchsimulator";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.0;
-			};
-			name = Release;
+			name = Products;
+			sourceTree = "<group>";
 		};
 		4A0D4325E2FE91FAE1E8108C /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -351,28 +260,103 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				COREML_CODEGEN_LANGUAGE = None;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QSM8NRJX7J;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VitalSense/Info.plist;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "VitalSense reads vitals recorded by your Apple Watch so it can estimate your clinical risk level.";
-				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "VitalSense sends your vitals to the risk model running on your computer, on this Wi-Fi network.";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/Frameworks");
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bayhacks.VitalSense;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1";
 			};
 			name = Release;
+		};
+		4D004F4EB8B1FB6B89D3BA75 /* PBXResourcesBuildPhase */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				77932CE6A76A0A42261B4D5A,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4E525355BC8838064F271EC6 /* LatestReadingView.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 59F6C14A055879251B4C03BC /* LatestReadingView.swift */;
+		};
+		510489EBC5593C781BF1FE60 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				2E70FA91EB4A88369208CAA4,
+				577C0F29F2AE419B27F7ABDA,
+				5E5C2DD5CBFF9DC4CA4BD38C,
+				D76930DD2A79A1B0E3256F2A,
+				E81D6AF2A1CECADA36AE1382,
+				C98F66938AC240CF1777E10D,
+				13D1FF85D959C95948C5E232,
+				8F77BB1176B436414E38520C,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		577C0F29F2AE419B27F7ABDA /* ConnectivityPayload.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = ConnectivityPayload.swift;
+			sourceTree = "<group>";
+		};
+		59F6C14A055879251B4C03BC /* LatestReadingView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = LatestReadingView.swift;
+			sourceTree = "<group>";
+		};
+		5BE84168B66EA83EF951FE6C /* VitalsReading.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 13D1FF85D959C95948C5E232 /* VitalsReading.swift */;
+		};
+		5E5C2DD5CBFF9DC4CA4BD38C /* NEWS2.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = NEWS2.swift;
+			sourceTree = "<group>";
+		};
+		612C6CB73BC05870F08B362D /* SettingsView.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 73EDAF36D0020773016B388A /* SettingsView.swift */;
+		};
+		6239D7E39F4E6174FC833394 /* RiskScorer.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = C98F66938AC240CF1777E10D /* RiskScorer.swift */;
+		};
+		630F3B70AC21CF7C8E2CBFFE /* RiskPrediction.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = E81D6AF2A1CECADA36AE1382 /* RiskPrediction.swift */;
+		};
+		6521EFD8862BB6DAB9B9C743 /* Info.plist */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = text.plist.xml;
+			path = Info.plist;
+			sourceTree = "<group>";
+		};
+		6718DDEEFEBF5E2EA129ED70 /* RiskStore.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = RiskStore.swift;
+			sourceTree = "<group>";
+		};
+		6EB14DAC5B81B1B63E9B9B84 /* VitalSense Watch App.app */ = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			path = "VitalSense Watch App.app";
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		70DCC1EB255A5F3C8D9ED349 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -391,10 +375,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1","$(inherited)");
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
@@ -405,22 +386,106 @@
 			};
 			name = Debug;
 		};
+		73EDAF36D0020773016B388A /* SettingsView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = SettingsView.swift;
+			sourceTree = "<group>";
+		};
+		77932CE6A76A0A42261B4D5A /* Assets.xcassets in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 7A72954F752997EAE36F8D8F /* Assets.xcassets */;
+		};
+		7A4DC4C98B1A7F9C53BA1492 /* VitalsCollector.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 22FFB67835DBC99E9256EDC4 /* VitalsCollector.swift */;
+		};
+		7A72954F752997EAE36F8D8F /* Assets.xcassets */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = folder.assetcatalog;
+			path = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		7EA8843A24977B0BA8E2C62E /* PBXFrameworksBuildPhase */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		823C17410A8D62E3706C6875 /* PhoneSessionManager.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = PhoneSessionManager.swift;
+			sourceTree = "<group>";
+		};
+		8B99BB637A40389B3822924B /* ConnectivityPayload.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 577C0F29F2AE419B27F7ABDA /* ConnectivityPayload.swift */;
+		};
+		8EDE5E05DA1F5BF282011CE4 /* VitalSense */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A27705FC7CEE3CBA12E67E38 /* Debug */,
+				4A0D4325E2FE91FAE1E8108C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8F77BB1176B436414E38520C /* VitalRisk.mlmodel */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = file.mlmodel;
+			path = VitalRisk.mlmodel;
+			sourceTree = "<group>";
+		};
+		907A148760E1039757BCB6FB /* VitalSense Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1840CE4A50E4D0EF83627166;
+			buildPhases = (
+				E42078E6C2D7A01D2C621913,
+				93112BEE249236E245E7098F,
+				4D004F4EB8B1FB6B89D3BA75,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "VitalSense Watch App";
+			productName = "VitalSense Watch App";
+			productReference = 6EB14DAC5B81B1B63E9B9B84;
+			productType = "com.apple.product-type.application";
+		};
+		93112BEE249236E245E7098F /* PBXFrameworksBuildPhase */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93D8E7404ECDCD22145D7729 /* ProbabilityChart.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 95C27477A10F0ECC245FAA8B /* ProbabilityChart.swift */;
+		};
+		95C27477A10F0ECC245FAA8B /* ProbabilityChart.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = ProbabilityChart.swift;
+			sourceTree = "<group>";
+		};
 		9E972DFC4B4D47F0AF42916B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				COREML_CODEGEN_LANGUAGE = None;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VitalSenseWatch/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = VitalSense;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/Frameworks");
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bayhacks.VitalSense.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -428,7 +493,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "watchos watchsimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = 4;
+				TARGETED_DEVICE_FAMILY = "4";
 				WATCHOS_DEPLOYMENT_TARGET = 11.0;
 			};
 			name = Debug;
@@ -439,28 +504,49 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				COREML_CODEGEN_LANGUAGE = None;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QSM8NRJX7J;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = VitalSense/Info.plist;
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "VitalSense reads vitals recorded by your Apple Watch so it can estimate your clinical risk level.";
-				INFOPLIST_KEY_NSLocalNetworkUsageDescription = "VitalSense sends your vitals to the risk model running on your computer, on this Wi-Fi network.";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)","@executable_path/Frameworks");
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.bayhacks.VitalSense;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1";
 			};
 			name = Debug;
+		};
+		A2855E4B1D8E826361DC7106 /* VitalsReading.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 13D1FF85D959C95948C5E232 /* VitalsReading.swift */;
+		};
+		A5540E62A54EF3DEE05A561E /* WatchSessionManager.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 04417AC7D9F20CC485E46735 /* WatchSessionManager.swift */;
+		};
+		A75168C3711EA43AE36F57B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3E7CBCC7D729FAC0D11859D3;
+			proxyType = 1;
+			remoteGlobalIDString = 907A148760E1039757BCB6FB;
+			remoteInfo = "VitalSense Watch App";
+		};
+		ADBEDB8A89DC9C39DEB9A395 /* Assets.xcassets in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = D5D07942BE5BC99326B48B6F /* Assets.xcassets */;
+		};
+		B3CB8697E6440A11A15CC3C4 /* VitalSense.app */ = {
+			isa = PBXFileReference;
+			explicitFileType = wrapper.application;
+			includeInIndex = 0;
+			path = VitalSense.app;
+			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		C3DCEEC1E0EB17A5583B8E94 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -486,37 +572,149 @@
 			};
 			name = Release;
 		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		1840CE4A50E4D0EF83627166 /* Build configuration list for PBXNativeTarget "VitalSense Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9E972DFC4B4D47F0AF42916B /* Debug */,
-				034331FB5E5A2511AC757D40 /* Release */,
+		C521DBE741A7EF4C09C04B2D /* VitalSenseWatch */ = {
+			isa = PBXGroup;
+			children = (
+				11706703BF873125DC4AA40F,
+				22FFB67835DBC99E9256EDC4,
+				1D87B49A0D2463CD61E0AEAF,
+				3A12B3B9B4475231B83BD9B6,
+				04417AC7D9F20CC485E46735,
+				7A72954F752997EAE36F8D8F,
+				6521EFD8862BB6DAB9B9C743,
 			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			path = VitalSenseWatch;
+			sourceTree = "<group>";
 		};
-		26E84C2B3712F7DFAC8AD93F /* Build configuration list for PBXProject "VitalSense" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				70DCC1EB255A5F3C8D9ED349 /* Debug */,
-				C3DCEEC1E0EB17A5583B8E94 /* Release */,
+		C69B3A1F4BB01B9C8B66CFF8 /* VitalSenseApp.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = C7DD5CE84050EB5A29F6B060 /* VitalSenseApp.swift */;
+		};
+		C7DD5CE84050EB5A29F6B060 /* VitalSenseApp.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = VitalSenseApp.swift;
+			sourceTree = "<group>";
+		};
+		C98F66938AC240CF1777E10D /* RiskScorer.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = RiskScorer.swift;
+			sourceTree = "<group>";
+		};
+		D2C5C949CD6EB2803EB3C2A6 /* WatchScoreModel.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 3A12B3B9B4475231B83BD9B6 /* WatchScoreModel.swift */;
+		};
+		D50994365C444E7A4A131A71 /* ContentView.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 063C9E4567A8A3CCB697DD3B /* ContentView.swift */;
+		};
+		D5D07942BE5BC99326B48B6F /* Assets.xcassets */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = folder.assetcatalog;
+			path = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		D5F51E1F8224CDDCC2E42638 /* AppSettings.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 2E70FA91EB4A88369208CAA4 /* AppSettings.swift */;
+		};
+		D750BBA11A9791A46385C585 /* ManualVitalsView.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = E976418B744A34E226EE9812 /* ManualVitalsView.swift */;
+		};
+		D76930DD2A79A1B0E3256F2A /* RiskPalette.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = RiskPalette.swift;
+			sourceTree = "<group>";
+		};
+		E42078E6C2D7A01D2C621913 /* PBXSourcesBuildPhase */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F18F3D7AEFCEBD7C5DF4C20F,
+				7A4DC4C98B1A7F9C53BA1492,
+				30CDB8D6E3C690AB6B2E1E1E,
+				D2C5C949CD6EB2803EB3C2A6,
+				A5540E62A54EF3DEE05A561E,
+				3C482F40AF90D4520D12610B,
+				32F61180FD53CA04C25C8D0B,
+				1BBD08D9CF474C0B44D801D3,
+				03C54D7344BB37C00A9C813A,
+				01E7B1FF23B72F5573AD47A9,
+				12B2A35F87BA6EBBEECB6467,
+				5BE84168B66EA83EF951FE6C,
+				F2952732A2501C7E46B3DA4B,
 			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8EDE5E05DA1F5BF282011CE4 /* Build configuration list for PBXNativeTarget "VitalSense" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A27705FC7CEE3CBA12E67E38 /* Debug */,
-				4A0D4325E2FE91FAE1E8108C /* Release */,
+		E5111A2E215B0A5ED7DCB371 /* HistoryView.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 40747BCEA37E88B214D38E4C /* HistoryView.swift */;
+		};
+		E81D6AF2A1CECADA36AE1382 /* RiskPrediction.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = RiskPrediction.swift;
+			sourceTree = "<group>";
+		};
+		E976418B744A34E226EE9812 /* ManualVitalsView.swift */ = {
+			isa = PBXFileReference;
+			lastKnownFileType = sourcecode.swift;
+			path = ManualVitalsView.swift;
+			sourceTree = "<group>";
+		};
+		F18F3D7AEFCEBD7C5DF4C20F /* VitalSenseWatchApp.swift in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 11706703BF873125DC4AA40F /* VitalSenseWatchApp.swift */;
+		};
+		F2952732A2501C7E46B3DA4B /* VitalRisk.mlmodel in VitalSense Watch App */ = {
+			isa = PBXBuildFile;
+			fileRef = 8F77BB1176B436414E38520C /* VitalRisk.mlmodel */;
+		};
+		F4D114F52683602D57C691B7 /* VitalSense */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8EDE5E05DA1F5BF282011CE4;
+			buildPhases = (
+				2EDCBDF8D84ED988021600CE,
+				7EA8843A24977B0BA8E2C62E,
+				2257D320BD3B97041FB4A222,
+				2496BDAAAB2FD4281F320C88,
 			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			buildRules = (
+			);
+			dependencies = (
+				395B9292F3DFD20D5FAE6146,
+			);
+			name = VitalSense;
+			productName = VitalSense;
+			productReference = B3CB8697E6440A11A15CC3C4;
+			productType = "com.apple.product-type.application";
 		};
-/* End XCConfigurationList section */
+		FAB44BDCCAC915C76587CE6F /* VitalSense */ = {
+			isa = PBXGroup;
+			children = (
+				063C9E4567A8A3CCB697DD3B,
+				40747BCEA37E88B214D38E4C,
+				59F6C14A055879251B4C03BC,
+				E976418B744A34E226EE9812,
+				823C17410A8D62E3706C6875,
+				95C27477A10F0ECC245FAA8B,
+				6718DDEEFEBF5E2EA129ED70,
+				73EDAF36D0020773016B388A,
+				C7DD5CE84050EB5A29F6B060,
+				D5D07942BE5BC99326B48B6F,
+				3CC5F77F412AF00E2514D009,
+			);
+			path = VitalSense;
+			sourceTree = "<group>";
+		};
+		FC0707DACDB7DF88121E8173 /* PhoneSessionManager.swift in VitalSense */ = {
+			isa = PBXBuildFile;
+			fileRef = 823C17410A8D62E3706C6875 /* PhoneSessionManager.swift */;
+		};
 	};
 	rootObject = 3E7CBCC7D729FAC0D11859D3 /* Project object */;
 }

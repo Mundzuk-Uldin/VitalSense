@@ -1,0 +1,442 @@
+{
+  "classes": [
+    "High",
+    "Low",
+    "Medium",
+    "Normal"
+  ],
+  "cases": [
+    {
+      "respiratory_rate": 19.0,
+      "oxygen_saturation": 95.0,
+      "o2_scale": 1,
+      "systolic_bp": 89.0,
+      "heart_rate": 121.0,
+      "temperature": 38.0,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Medium",
+      "expected_probabilities": {
+        "High": 0.197839,
+        "Low": 0.002306,
+        "Medium": 0.795219,
+        "Normal": 0.004636
+      },
+      "dataset_label": "Medium"
+    },
+    {
+      "respiratory_rate": 14.0,
+      "oxygen_saturation": 97.0,
+      "o2_scale": 1,
+      "systolic_bp": 139.0,
+      "heart_rate": 79.0,
+      "temperature": 36.6,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Normal",
+      "expected_probabilities": {
+        "High": 4.9e-05,
+        "Low": 0.000839,
+        "Medium": 0.000127,
+        "Normal": 0.998985
+      },
+      "dataset_label": "Normal"
+    },
+    {
+      "respiratory_rate": 28.0,
+      "oxygen_saturation": 88.0,
+      "o2_scale": 1,
+      "systolic_bp": 73.0,
+      "heart_rate": 147.0,
+      "temperature": 38.1,
+      "on_oxygen": true,
+      "consciousness": "V",
+      "expected_label": "High",
+      "expected_probabilities": {
+        "High": 0.999969,
+        "Low": 1e-06,
+        "Medium": 0.0,
+        "Normal": 3.1e-05
+      },
+      "dataset_label": "High"
+    },
+    {
+      "respiratory_rate": 12.0,
+      "oxygen_saturation": 100.0,
+      "o2_scale": 1,
+      "systolic_bp": 114.0,
+      "heart_rate": 65.0,
+      "temperature": 37.1,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Normal",
+      "expected_probabilities": {
+        "High": 1.9e-05,
+        "Low": 5.3e-05,
+        "Medium": 4.3e-05,
+        "Normal": 0.999886
+      },
+      "dataset_label": "Normal"
+    },
+    {
+      "respiratory_rate": 23.0,
+      "oxygen_saturation": 97.0,
+      "o2_scale": 1,
+      "systolic_bp": 86.0,
+      "heart_rate": 118.0,
+      "temperature": 38.6,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "High",
+      "expected_probabilities": {
+        "High": 0.997025,
+        "Low": 9.8e-05,
+        "Medium": 0.002109,
+        "Normal": 0.000768
+      },
+      "dataset_label": "High"
+    },
+    {
+      "respiratory_rate": 26.0,
+      "oxygen_saturation": 92.0,
+      "o2_scale": 2,
+      "systolic_bp": 67.0,
+      "heart_rate": 112.0,
+      "temperature": 37.2,
+      "on_oxygen": true,
+      "consciousness": "V",
+      "expected_label": "High",
+      "expected_probabilities": {
+        "High": 0.99906,
+        "Low": 0.000175,
+        "Medium": 4.3e-05,
+        "Normal": 0.000722
+      },
+      "dataset_label": "High"
+    },
+    {
+      "respiratory_rate": 15.0,
+      "oxygen_saturation": 97.0,
+      "o2_scale": 1,
+      "systolic_bp": 128.0,
+      "heart_rate": 79.0,
+      "temperature": 36.7,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Normal",
+      "expected_probabilities": {
+        "High": 9e-05,
+        "Low": 0.000702,
+        "Medium": 0.000238,
+        "Normal": 0.99897
+      },
+      "dataset_label": "Normal"
+    },
+    {
+      "respiratory_rate": 13.0,
+      "oxygen_saturation": 96.0,
+      "o2_scale": 1,
+      "systolic_bp": 120.0,
+      "heart_rate": 76.0,
+      "temperature": 36.6,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Normal",
+      "expected_probabilities": {
+        "High": 8.4e-05,
+        "Low": 0.000834,
+        "Medium": 0.00022,
+        "Normal": 0.998862
+      },
+      "dataset_label": "Normal"
+    },
+    {
+      "respiratory_rate": 26.0,
+      "oxygen_saturation": 88.0,
+      "o2_scale": 1,
+      "systolic_bp": 96.0,
+      "heart_rate": 132.0,
+      "temperature": 38.4,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "High",
+      "expected_probabilities": {
+        "High": 0.999354,
+        "Low": 0.000117,
+        "Medium": 5.3e-05,
+        "Normal": 0.000477
+      },
+      "dataset_label": "High"
+    },
+    {
+      "respiratory_rate": 16.0,
+      "oxygen_saturation": 98.0,
+      "o2_scale": 1,
+      "systolic_bp": 142.0,
+      "heart_rate": 73.0,
+      "temperature": 36.9,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Normal",
+      "expected_probabilities": {
+        "High": 4.2e-05,
+        "Low": 0.00025,
+        "Medium": 0.000112,
+        "Normal": 0.999595
+      },
+      "dataset_label": "Normal"
+    },
+    {
+      "respiratory_rate": 19.0,
+      "oxygen_saturation": 95.0,
+      "o2_scale": 1,
+      "systolic_bp": 126.0,
+      "heart_rate": 92.0,
+      "temperature": 37.2,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Low",
+      "expected_probabilities": {
+        "High": 8e-06,
+        "Low": 0.999632,
+        "Medium": 0.000214,
+        "Normal": 0.000146
+      },
+      "dataset_label": "Low"
+    },
+    {
+      "respiratory_rate": 20.0,
+      "oxygen_saturation": 92.0,
+      "o2_scale": 1,
+      "systolic_bp": 112.0,
+      "heart_rate": 92.0,
+      "temperature": 37.0,
+      "on_oxygen": true,
+      "consciousness": "A",
+      "expected_label": "Medium",
+      "expected_probabilities": {
+        "High": 0.001004,
+        "Low": 0.033594,
+        "Medium": 0.964729,
+        "Normal": 0.000673
+      },
+      "dataset_label": "Medium"
+    },
+    {
+      "respiratory_rate": 16.0,
+      "oxygen_saturation": 97.0,
+      "o2_scale": 1,
+      "systolic_bp": 118.0,
+      "heart_rate": 76.0,
+      "temperature": 36.8,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Normal",
+      "expected_probabilities": {
+        "High": 0.000109,
+        "Low": 0.000496,
+        "Medium": 0.00028,
+        "Normal": 0.999115
+      },
+      "dataset_label": "Normal"
+    },
+    {
+      "respiratory_rate": 25.0,
+      "oxygen_saturation": 83.0,
+      "o2_scale": 1,
+      "systolic_bp": 83.0,
+      "heart_rate": 141.0,
+      "temperature": 39.0,
+      "on_oxygen": true,
+      "consciousness": "A",
+      "expected_label": "High",
+      "expected_probabilities": {
+        "High": 0.999915,
+        "Low": 9e-06,
+        "Medium": 1e-06,
+        "Normal": 7.6e-05
+      },
+      "dataset_label": "High"
+    },
+    {
+      "respiratory_rate": 24.0,
+      "oxygen_saturation": 95.0,
+      "o2_scale": 1,
+      "systolic_bp": 122.0,
+      "heart_rate": 78.0,
+      "temperature": 36.6,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Low",
+      "expected_probabilities": {
+        "High": 4e-06,
+        "Low": 0.999641,
+        "Medium": 0.000325,
+        "Normal": 3.1e-05
+      },
+      "dataset_label": "Low"
+    },
+    {
+      "respiratory_rate": 29.0,
+      "oxygen_saturation": 86.0,
+      "o2_scale": 1,
+      "systolic_bp": 73.0,
+      "heart_rate": 106.0,
+      "temperature": 40.2,
+      "on_oxygen": true,
+      "consciousness": "A",
+      "expected_label": "High",
+      "expected_probabilities": {
+        "High": 0.999871,
+        "Low": 9e-06,
+        "Medium": 1e-06,
+        "Normal": 0.000118
+      },
+      "dataset_label": "High"
+    },
+    {
+      "respiratory_rate": 24.0,
+      "oxygen_saturation": 93.0,
+      "o2_scale": 1,
+      "systolic_bp": 97.0,
+      "heart_rate": 90.0,
+      "temperature": 37.9,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Medium",
+      "expected_probabilities": {
+        "High": 0.000963,
+        "Low": 0.000381,
+        "Medium": 0.998611,
+        "Normal": 4.6e-05
+      },
+      "dataset_label": "Medium"
+    },
+    {
+      "respiratory_rate": 17.0,
+      "oxygen_saturation": 97.0,
+      "o2_scale": 1,
+      "systolic_bp": 115.0,
+      "heart_rate": 90.0,
+      "temperature": 38.2,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Low",
+      "expected_probabilities": {
+        "High": 1.8e-05,
+        "Low": 0.999198,
+        "Medium": 0.000278,
+        "Normal": 0.000507
+      },
+      "dataset_label": "Low"
+    },
+    {
+      "respiratory_rate": 22.0,
+      "oxygen_saturation": 92.0,
+      "o2_scale": 2,
+      "systolic_bp": 98.0,
+      "heart_rate": 108.0,
+      "temperature": 38.8,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Medium",
+      "expected_probabilities": {
+        "High": 0.000412,
+        "Low": 5.8e-05,
+        "Medium": 0.999494,
+        "Normal": 3.6e-05
+      },
+      "dataset_label": "Medium"
+    },
+    {
+      "respiratory_rate": 17.0,
+      "oxygen_saturation": 97.0,
+      "o2_scale": 1,
+      "systolic_bp": 130.0,
+      "heart_rate": 96.0,
+      "temperature": 36.9,
+      "on_oxygen": true,
+      "consciousness": "A",
+      "expected_label": "Low",
+      "expected_probabilities": {
+        "High": 6e-06,
+        "Low": 0.999688,
+        "Medium": 0.00021,
+        "Normal": 9.5e-05
+      },
+      "dataset_label": "Low"
+    },
+    {
+      "respiratory_rate": 15.0,
+      "oxygen_saturation": 99.0,
+      "o2_scale": 1,
+      "systolic_bp": 125.0,
+      "heart_rate": 66.0,
+      "temperature": 36.8,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Normal",
+      "expected_probabilities": {
+        "High": 2.2e-05,
+        "Low": 7.1e-05,
+        "Medium": 5.2e-05,
+        "Normal": 0.999855
+      },
+      "dataset_label": "Normal"
+    },
+    {
+      "respiratory_rate": 23.0,
+      "oxygen_saturation": 96.0,
+      "o2_scale": 1,
+      "systolic_bp": 111.0,
+      "heart_rate": 108.0,
+      "temperature": 37.6,
+      "on_oxygen": true,
+      "consciousness": "A",
+      "expected_label": "Medium",
+      "expected_probabilities": {
+        "High": 0.003242,
+        "Low": 0.010857,
+        "Medium": 0.985216,
+        "Normal": 0.000685
+      },
+      "dataset_label": "Medium"
+    },
+    {
+      "respiratory_rate": 24.0,
+      "oxygen_saturation": 90.0,
+      "o2_scale": 2,
+      "systolic_bp": 106.0,
+      "heart_rate": 120.0,
+      "temperature": 38.6,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Medium",
+      "expected_probabilities": {
+        "High": 0.001488,
+        "Low": 0.000313,
+        "Medium": 0.998057,
+        "Normal": 0.000141
+      },
+      "dataset_label": "Medium"
+    },
+    {
+      "respiratory_rate": 17.0,
+      "oxygen_saturation": 95.0,
+      "o2_scale": 1,
+      "systolic_bp": 104.0,
+      "heart_rate": 65.0,
+      "temperature": 37.5,
+      "on_oxygen": false,
+      "consciousness": "A",
+      "expected_label": "Low",
+      "expected_probabilities": {
+        "High": 8e-06,
+        "Low": 0.999616,
+        "Medium": 0.000205,
+        "Normal": 0.000171
+      },
+      "dataset_label": "Low"
+    }
+  ]
+}

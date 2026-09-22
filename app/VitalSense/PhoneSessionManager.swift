@@ -3,9 +3,10 @@ import WatchConnectivity
 
 /// The iPhone's half of the watch link.
 ///
-/// Readings arrive here; the store scores them and the answer goes straight
-/// back in the reply, so the watch gets its result without a second round
-/// trip.
+/// The watch carries the same model, so it usually scores its own reading
+/// and sends the result along with it. The phone records both. When the
+/// watch could not score — its model failed to load, say — the prediction is
+/// absent and the phone scores it instead, replying with the answer.
 @MainActor
 final class PhoneSessionManager: NSObject, ObservableObject {
 
@@ -14,8 +15,9 @@ final class PhoneSessionManager: NSObject, ObservableObject {
     @Published private(set) var isReachable = false
     @Published private(set) var lastReceivedAt: Date?
 
-    /// Set by `RiskStore`. Returns the prediction to send back to the watch.
-    var onReadingReceived: ((VitalsReading) async -> RiskPrediction?)?
+    /// Set by `RiskStore`. Receives the reading and whatever the watch
+    /// already worked out, and returns the prediction to reply with.
+    var onReadingReceived: ((VitalsReading, RiskPrediction?) -> RiskPrediction?)?
 
     private var session: WCSession?
 
@@ -25,13 +27,6 @@ final class PhoneSessionManager: NSObject, ObservableObject {
         session.delegate = self
         session.activate()
         self.session = session
-    }
-
-    /// Keep the watch's copy of the server address in step with ours, so its
-    /// direct fallback points somewhere real.
-    func pushSettings(apiBaseURL: String) {
-        guard let session, session.activationState == .activated else { return }
-        try? session.updateApplicationContext([AppSettings.Key.apiBaseURL: apiBaseURL])
     }
 
     /// Send a prediction the watch did not ask for -- after a re-score, say.
@@ -50,7 +45,7 @@ final class PhoneSessionManager: NSObject, ObservableObject {
         isReachable = session.isReachable
     }
 
-    fileprivate func handle(_ message: [String: Any]) async -> [String: Any] {
+    fileprivate func handle(_ message: [String: Any]) -> [String: Any] {
         guard let reading = ConnectivityPayload.decode(
             VitalsReading.self, from: message, key: ConnectivityPayload.readingKey
         ) else {
@@ -58,9 +53,12 @@ final class PhoneSessionManager: NSObject, ObservableObject {
         }
 
         lastReceivedAt = Date()
+        let fromWatch = ConnectivityPayload.decode(
+            RiskPrediction.self, from: message, key: ConnectivityPayload.predictionKey
+        )
 
-        guard let prediction = await onReadingReceived?(reading) else {
-            return [ConnectivityPayload.errorKey: "The iPhone could not reach the risk server."]
+        guard let prediction = onReadingReceived?(reading, fromWatch) else {
+            return [ConnectivityPayload.errorKey: "The iPhone could not score that reading."]
         }
         return (try? ConnectivityPayload.encode(
             prediction, key: ConnectivityPayload.predictionKey
@@ -98,7 +96,7 @@ extension PhoneSessionManager: WCSessionDelegate {
                 replyHandler([ConnectivityPayload.errorKey: "iPhone is not ready."])
                 return
             }
-            replyHandler(await self.handle(message))
+            replyHandler(self.handle(message))
         }
     }
 
@@ -106,7 +104,7 @@ extension PhoneSessionManager: WCSessionDelegate {
     /// out of range. There is nobody to reply to; we just record it.
     nonisolated func session(_ session: WCSession, didReceiveUserInfo userInfo: [String: Any]) {
         Task { @MainActor [weak self] in
-            _ = await self?.handle(userInfo)
+            _ = self?.handle(userInfo)
         }
     }
 }
