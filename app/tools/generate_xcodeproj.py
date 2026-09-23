@@ -12,6 +12,7 @@ and it is in the build.
 from __future__ import annotations
 
 import hashlib
+import json
 import shutil
 from pathlib import Path
 
@@ -579,8 +580,15 @@ def scheme(name: str, target_id: str, blueprint: str) -> str:
 
 
 def write_asset_catalogs() -> None:
-    """Minimal catalogs so the asset compiler has an AppIcon and an
-    AccentColor to find rather than warning about their absence."""
+    """Write the asset catalogs, wiring in the app icon if one is present.
+
+    The 1024 PNG lives once in `Branding/` and is copied into both catalogs,
+    so the two apps cannot end up with different icons. iOS and watchOS both
+    mask the corners themselves, so the asset is a plain opaque square.
+    """
+    icon_source = ROOT / "Branding" / "AppIcon-1024.png"
+    icon_name = "AppIcon-1024.png"
+
     for folder, platform in ((IOS_DIR, "ios"), (WATCH_DIR, "watchos")):
         catalog = ROOT / folder / "Assets.xcassets"
         (catalog / "AppIcon.appiconset").mkdir(parents=True, exist_ok=True)
@@ -589,22 +597,43 @@ def write_asset_catalogs() -> None:
         (catalog / "Contents.json").write_text(
             '{\n  "info" : {\n    "author" : "xcode",\n    "version" : 1\n  }\n}\n'
         )
-        icon_platform = "watchos" if platform == "watchos" else "ios"
+
+        image: dict[str, object] = {"idiom": "universal", "platform": platform, "size": "1024x1024"}
+        if icon_source.exists():
+            shutil.copy2(icon_source, catalog / "AppIcon.appiconset" / icon_name)
+            image["filename"] = icon_name
         (catalog / "AppIcon.appiconset" / "Contents.json").write_text(
-            '{\n  "images" : [\n    {\n'
-            f'      "idiom" : "universal",\n      "platform" : "{icon_platform}",\n'
-            '      "size" : "1024x1024"\n    }\n  ],\n'
-            '  "info" : {\n    "author" : "xcode",\n    "version" : 1\n  }\n}\n'
+            json.dumps(
+                {"images": [image], "info": {"author": "xcode", "version": 1}}, indent=2
+            )
+            + "\n"
         )
-        # A teal accent: distinct from every one of the four reserved risk
-        # colours, so a button chrome can never be mistaken for a verdict.
+
+        # Sampled from the icon's gradient, so app chrome matches the mark.
+        # Distinct from all four reserved risk colours, so a button can never
+        # be mistaken for a verdict.
         (catalog / "AccentColor.colorset" / "Contents.json").write_text(
-            '{\n  "colors" : [\n    {\n      "color" : {\n'
-            '        "color-space" : "srgb",\n        "components" : {\n'
-            '          "alpha" : "1.000",\n          "blue" : "0.612",\n'
-            '          "green" : "0.541",\n          "red" : "0.114"\n'
-            '        }\n      },\n      "idiom" : "universal"\n    }\n  ],\n'
-            '  "info" : {\n    "author" : "xcode",\n    "version" : 1\n  }\n}\n'
+            json.dumps(
+                {
+                    "colors": [
+                        {
+                            "color": {
+                                "color-space": "srgb",
+                                "components": {
+                                    "alpha": "1.000",
+                                    "blue": "0.597",
+                                    "green": "0.565",
+                                    "red": "0.186",
+                                },
+                            },
+                            "idiom": "universal",
+                        }
+                    ],
+                    "info": {"author": "xcode", "version": 1},
+                },
+                indent=2,
+            )
+            + "\n"
         )
 
 
