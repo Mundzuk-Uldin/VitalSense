@@ -15,3 +15,6 @@ xcuserdata/
 # Signing: each developer's team and bundle ID are local to their machine.
 # See "Running it on your own devices" in the README.
 *.mobileprovision
+
+# Personal signing settings (bundle ID prefix, developer team).
+app/Config/Local.xcconfig

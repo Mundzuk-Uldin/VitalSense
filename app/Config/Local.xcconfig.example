@@ -1,0 +1,16 @@
+// Copy to Local.xcconfig and edit. That file is git-ignored, so your
+// settings stay yours and nobody else's signing breaks.
+//
+//     cp app/Config/Local.xcconfig.example app/Config/Local.xcconfig
+//
+// The prefix must be globally unique to Apple -- use a domain you control,
+// or just your name. The three bundle IDs derive from it automatically:
+//
+//     <prefix>.VitalSense               the iPhone app
+//     <prefix>.VitalSense.watchkitapp   the watch app
+//
+// Find your team ID in Xcode → Settings → Accounts, or at
+// developer.apple.com/account under Membership.
+
+VITALSENSE_BUNDLE_PREFIX = com.yourname
+VITALSENSE_DEVELOPMENT_TEAM = YOURTEAMID

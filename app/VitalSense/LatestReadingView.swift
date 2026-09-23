@@ -6,6 +6,7 @@ import SwiftUI
 /// actually measure, and which vitals drove it.
 struct LatestReadingView: View {
     @EnvironmentObject private var store: RiskStore
+    @EnvironmentObject private var health: PhoneVitalsCollector
     @State private var showingManualVitals = false
 
     var body: some View {
@@ -39,7 +40,16 @@ struct LatestReadingView: View {
             .navigationTitle("Now")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    WatchLinkIndicator()
+                    Button {
+                        Task { store.score(await health.read()) }
+                    } label: {
+                        if health.isReading {
+                            ProgressView()
+                        } else {
+                            Label("Read from Health", systemImage: "arrow.clockwise")
+                        }
+                    }
+                    .disabled(health.isReading)
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
@@ -144,7 +154,7 @@ struct MeasurementSourceSection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("From your watch")
+                Text(reading.source == "health" ? "From Health" : "From your watch")
                     .font(.subheadline.weight(.semibold))
                 Spacer()
                 Text("\(reading.measuredVitals.count) of 4 measured")
@@ -295,33 +305,41 @@ private struct ModelFootnote: View {
 
 // MARK: - Chrome
 
-private struct WatchLinkIndicator: View {
-    @EnvironmentObject private var store: RiskStore
-
-    var body: some View {
-        let connected = store.connectivity.isReachable
-        Label(
-            connected ? "Watch connected" : "Watch not reachable",
-            systemImage: connected ? "applewatch.radiowaves.left.and.right" : "applewatch.slash"
-        )
-        .labelStyle(.iconOnly)
-        .foregroundStyle(connected ? Color.accentColor : Color.secondary)
-    }
-}
-
 private struct EmptyStateView: View {
     @EnvironmentObject private var store: RiskStore
+    @EnvironmentObject private var health: PhoneVitalsCollector
 
     var body: some View {
         ContentUnavailableView {
-            Label("No readings yet", systemImage: "applewatch")
+            Label("No readings yet", systemImage: "heart.text.square")
         } description: {
-            Text("Open VitalSense on your Apple Watch and tap Read & Score.")
+            Text(
+                "Your Apple Watch syncs its measurements to Health, and this app "
+                + "reads them from there. No watch app required."
+            )
         } actions: {
-            Button("Score a demo reading") {
-                Task { await store.score(.demo(risk: "Medium")) }
+            Button {
+                Task { store.score(await health.read()) }
+            } label: {
+                if health.isReading {
+                    ProgressView()
+                } else {
+                    Text("Read from Health")
+                }
             }
             .buttonStyle(.borderedProminent)
+            .disabled(health.isReading)
+
+            Button("Score a demo reading") {
+                store.score(.demo(risk: "Medium"))
+            }
+
+            if let error = health.errorMessage {
+                Text(error)
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+            }
         }
     }
 }

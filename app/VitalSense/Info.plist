@@ -2,11 +2,9 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
-	</dict>
+	<!-- Usage strings and other required keys are injected from build
+	     settings by tools/generate_xcodeproj.py, so that editing this file
+	     in Xcode cannot silently drop a key the app crashes without. -->
 	<key>UILaunchScreen</key>
 	<dict/>
 </dict>

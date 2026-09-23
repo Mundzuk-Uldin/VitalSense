@@ -24,8 +24,31 @@ IOS_DIR = "VitalSense"
 WATCH_DIR = "VitalSenseWatch"
 SHARED_DIR = "Shared"
 
-IOS_BUNDLE_ID = "com.bayhacks.VitalSense"
-WATCH_BUNDLE_ID = f"{IOS_BUNDLE_ID}.watchkitapp"
+# Bundle IDs derive from one setting in Config/Base.xcconfig, which an
+# untracked Local.xcconfig overrides. That keeps the three places the ID has
+# to match -- both targets and the watch's companion key -- from drifting
+# apart, and lets two people build the same checkout without colliding.
+IOS_BUNDLE_ID = '"$(VITALSENSE_BUNDLE_PREFIX).VitalSense"'
+WATCH_BUNDLE_ID = '"$(VITALSENSE_BUNDLE_PREFIX).VitalSense.watchkitapp"' 
+
+# The iPhone app reads the watch's vitals straight out of HealthKit, so it is
+# a complete product on its own. Embedding the watch app makes the iPhone
+# install fail if anything about the watch target is misconfigured, which is
+# a bad trade when the watch app is optional. Set this True to ship both.
+EMBED_WATCH_APP = False
+
+# Injected into both Info.plists at build time. HealthKit *crashes the app*
+# at launch if its usage string is missing, and a usage string sitting in a
+# hand-edited plist is one stray click away from being gone. Declaring them
+# here makes the plists regenerable and the keys impossible to lose.
+HEALTH_SHARE_USAGE = (
+    "VitalSense reads the heart rate, blood oxygen, respiratory rate and wrist "
+    "temperature your Apple Watch records, so it can estimate your clinical risk level."
+)
+HEALTH_UPDATE_USAGE = (
+    "VitalSense starts a background sensor session so your Apple Watch samples "
+    "your heart rate continuously while you are being monitored."
+)
 
 COREML_MODEL = "VitalRisk.mlmodel"
 
@@ -69,6 +92,16 @@ def quote(value: str) -> str:
 
 def generate() -> str:
     p = Project()
+
+    config_ref = uid("ref", "Base.xcconfig")
+    p.add(
+        config_ref,
+        "PBXFileReference",
+        "\t\t\tlastKnownFileType = text.xcconfig;\n"
+        "\t\t\tpath = Base.xcconfig;\n"
+        "\t\t\tsourceTree = \"<group>\";\n",
+        "Base.xcconfig",
+    )
 
     ios_sources = [(IOS_DIR, f) for f in swift_files(IOS_DIR)]
     watch_sources = [(WATCH_DIR, f) for f in swift_files(WATCH_DIR)]
@@ -215,9 +248,10 @@ def generate() -> str:
         WATCH_DIR,
     )
     products_group = group(uid("group", "Products"), [ios_product, watch_product], "Products", None)
+    config_group = group(uid("group", "Config"), [config_ref], None, "Config")
     root_group = group(
         uid("group", "root"),
-        [shared_group, ios_group, watch_group, products_group],
+        [config_group, shared_group, ios_group, watch_group, products_group],
         None,
         None,
     )
@@ -236,7 +270,7 @@ def generate() -> str:
     ios_embed_phase = phase(
         uid("phase", IOS_TARGET, "embed"),
         "PBXCopyFilesBuildPhase",
-        [embed_watch],
+        [embed_watch] if EMBED_WATCH_APP else [],
         "\t\t\tdstPath = \"$(CONTENTS_FOLDER_PATH)/Watch\";\n"
         "\t\t\tdstSubfolderSpec = 16;\n"
         "\t\t\tname = \"Embed Watch Content\";\n",
@@ -296,7 +330,7 @@ def generate() -> str:
         # wrapper class, so there is no interface to generate.
         "COREML_CODEGEN_LANGUAGE": "None",
         "CURRENT_PROJECT_VERSION": "1",
-        "DEVELOPMENT_TEAM": '""',
+        "DEVELOPMENT_TEAM": '"$(VITALSENSE_DEVELOPMENT_TEAM)"',
         "ENABLE_PREVIEWS": "YES",
         "GENERATE_INFOPLIST_FILE": "YES",
         "MARKETING_VERSION": "1.0",
@@ -306,7 +340,12 @@ def generate() -> str:
     ios_target_settings = dict(
         common_target,
         **{
+            "CODE_SIGN_ENTITLEMENTS": f"{IOS_DIR}/VitalSense.entitlements",
             "INFOPLIST_FILE": f"{IOS_DIR}/Info.plist",
+            "INFOPLIST_KEY_NSHealthShareUsageDescription": quote(HEALTH_SHARE_USAGE),
+            "INFOPLIST_KEY_UISupportedInterfaceOrientations": quote(
+                "UIInterfaceOrientationPortrait"
+            ),
             "IPHONEOS_DEPLOYMENT_TARGET": IOS_DEPLOYMENT,
             "LD_RUNPATH_SEARCH_PATHS": '("$(inherited)","@executable_path/Frameworks")',
             "PRODUCT_BUNDLE_IDENTIFIER": IOS_BUNDLE_ID,
@@ -319,8 +358,16 @@ def generate() -> str:
     watch_target_settings = dict(
         common_target,
         **{
+            "CODE_SIGN_ENTITLEMENTS": f"{WATCH_DIR}/VitalSenseWatch.entitlements",
             "INFOPLIST_FILE": f"{WATCH_DIR}/Info.plist",
             "INFOPLIST_KEY_CFBundleDisplayName": "VitalSense",
+            # A build setting rather than a raw Info.plist key, so it tracks
+            # the iOS bundle ID automatically. Getting these two out of step
+            # is what makes an iPhone install fail with "incorrect value for
+            # WKCompanionAppBundleIdentifier".
+            "INFOPLIST_KEY_WKCompanionAppBundleIdentifier": IOS_BUNDLE_ID,
+            "INFOPLIST_KEY_NSHealthShareUsageDescription": quote(HEALTH_SHARE_USAGE),
+            "INFOPLIST_KEY_NSHealthUpdateUsageDescription": quote(HEALTH_UPDATE_USAGE),
             "LD_RUNPATH_SEARCH_PATHS": '("$(inherited)","@executable_path/Frameworks")',
             "PRODUCT_BUNDLE_IDENTIFIER": WATCH_BUNDLE_ID,
             "SDKROOT": "watchos",
@@ -333,8 +380,14 @@ def generate() -> str:
 
     def config(owner: str, name: str, settings: dict[str, str]) -> str:
         identifier = uid("config", owner, name)
+        base = (
+            f"\t\t\tbaseConfigurationReference = {config_ref} /* Base.xcconfig */;\n"
+            if owner == "project"
+            else ""
+        )
         body = (
-            "\t\t\tbuildSettings = {\n"
+            base
+            + "\t\t\tbuildSettings = {\n"
             + build_settings(settings)
             + f"\n\t\t\t}};\n\t\t\tname = {name};\n"
         )
@@ -422,8 +475,9 @@ def generate() -> str:
         f"\t\t\t\t{ios_embed_phase},\n"
         "\t\t\t);\n"
         "\t\t\tbuildRules = (\n\t\t\t);\n"
-        f"\t\t\tdependencies = (\n\t\t\t\t{dependency},\n\t\t\t);\n"
-        f"\t\t\tname = {quote(IOS_TARGET)};\n"
+        + (f"\t\t\tdependencies = (\n\t\t\t\t{dependency},\n\t\t\t);\n"
+           if EMBED_WATCH_APP else "\t\t\tdependencies = (\n\t\t\t);\n")
+        + f"\t\t\tname = {quote(IOS_TARGET)};\n"
         f"\t\t\tproductName = {quote(IOS_TARGET)};\n"
         f"\t\t\tproductReference = {ios_product};\n"
         "\t\t\tproductType = \"com.apple.product-type.application\";\n",

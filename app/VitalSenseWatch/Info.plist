@@ -2,24 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<!-- Usage strings and the companion bundle ID are injected from build
+	     settings by tools/generate_xcodeproj.py. -->
 	<key>WKApplication</key>
 	<true/>
-	<key>WKCompanionAppBundleIdentifier</key>
-	<string>com.bayhacks.VitalSense</string>
 	<key>WKRunsIndependentlyOfCompanionApp</key>
 	<false/>
 	<key>WKBackgroundModes</key>
 	<array>
 		<string>workout-processing</string>
 	</array>
-	<key>NSHealthShareUsageDescription</key>
-	<string>VitalSense reads your heart rate, blood oxygen, respiratory rate and wrist temperature so it can estimate your clinical risk level.</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>VitalSense starts a background sensor session so your Apple Watch samples your heart rate continuously while you are being monitored.</string>
-	<key>NSAppTransportSecurity</key>
-	<dict>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
-	</dict>
 </dict>
 </plist>

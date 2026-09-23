@@ -30,22 +30,14 @@ final class VitalsCollector: NSObject, ObservableObject {
     @Published private(set) var errorMessage: String?
 
     private let store = HKHealthStore()
+    private let reader: HealthVitalsReader
     private var workoutSession: HKWorkoutSession?
     private var workoutBuilder: HKLiveWorkoutBuilder?
     private var passiveRefreshTask: Task<Void, Never>?
 
-    /// Baseline for the wrist-temperature deviation. Needs several nights of
-    /// data before it means anything.
-    private static let minimumBaselineSamples = 3
-    private static let assumedNormalCoreTemperature = 37.0
-
-    private static var quantityTypes: [HKQuantityTypeIdentifier] {
-        [.heartRate, .oxygenSaturation, .respiratoryRate, .bodyTemperature,
-         .appleSleepingWristTemperature]
-    }
-
-    private var readTypes: Set<HKObjectType> {
-        Set(Self.quantityTypes.map { HKQuantityType($0) as HKObjectType })
+    override init() {
+        reader = HealthVitalsReader(store: store)
+        super.init()
     }
 
     // MARK: - Authorization
@@ -60,7 +52,7 @@ final class VitalsCollector: NSObject, ObservableObject {
             // as well as read access to the vitals themselves.
             try await store.requestAuthorization(
                 toShare: [HKObjectType.workoutType()],
-                read: readTypes
+                read: HealthVitalsReader.readTypes
             )
             isAuthorized = true
             statusMessage = "Ready"
@@ -145,105 +137,18 @@ final class VitalsCollector: NSObject, ObservableObject {
         }
     }
 
+    /// Heart rate arrives live from the workout session, so it is excluded
+    /// here; everything else is whatever Health last recorded.
     func refreshPassiveVitals() async {
-        // Blood oxygen is stored as a fraction, not a percentage.
-        if let (value, date) = await latestSample(
-            .oxygenSaturation, unit: .percent(), within: .hours(12)
-        ) {
-            reading.oxygenSaturation = Vital(value * 100, provenance: .sensor, sampledAt: date)
+        var updated = reading
+        await reader.populate(&updated, includeHeartRate: !isMonitoring)
+        // The workout session may have delivered a live heart rate while
+        // those queries were in flight. It is fresher than anything the
+        // snapshot holds, so it wins.
+        if isMonitoring {
+            updated.heartRate = reading.heartRate
         }
-
-        if let (value, date) = await latestSample(
-            .respiratoryRate, unit: HKUnit.count().unitDivided(by: .minute()), within: .hours(36)
-        ) {
-            reading.respiratoryRate = Vital(value, provenance: .sensor, sampledAt: date)
-        }
-
-        if let temperature = await estimatedBodyTemperature() {
-            reading.temperature = temperature
-        }
-
-        reading.recordedAt = Date()
-    }
-
-    /// Turn a wrist temperature into something NEWS2 can score.
-    ///
-    /// This is the subtlest part of the app. `appleSleepingWristTemperature`
-    /// is skin temperature at the wrist, which sits around 33-35 °C in a
-    /// healthy person. Feeding that number straight into NEWS2 scores 3
-    /// points for hypothermia on someone who is perfectly well. Apple's own
-    /// Health app never shows the absolute value either -- it shows a
-    /// *deviation* from the wearer's personal baseline.
-    ///
-    /// So: prefer a real body temperature if one has been logged, otherwise
-    /// convert the wrist reading into a deviation from the wearer's own
-    /// trailing baseline and apply that deviation to a normal core
-    /// temperature. With too few nights to form a baseline, return nothing
-    /// and let the caller keep its assumed value.
-    private func estimatedBodyTemperature() async -> Vital? {
-        if let (value, date) = await latestSample(
-            .bodyTemperature, unit: .degreeCelsius(), within: .hours(12)
-        ) {
-            return Vital(value, provenance: .sensor, sampledAt: date)
-        }
-
-        let history = await samples(
-            .appleSleepingWristTemperature, unit: .degreeCelsius(), within: .days(30), limit: 30
-        )
-        guard let latest = history.first, history.count >= Self.minimumBaselineSamples else {
-            return nil
-        }
-
-        let baselineSamples = history.dropFirst()
-        let baseline = baselineSamples.reduce(0.0) { $0 + $1.value } / Double(baselineSamples.count)
-        // Clamp: a wrist deviation beyond a few degrees is an artefact of a
-        // loose band or a cold room, not a fever.
-        let deviation = min(max(latest.value - baseline, -3.0), 3.0)
-        return Vital(
-            Self.assumedNormalCoreTemperature + deviation,
-            provenance: .sensor,
-            sampledAt: latest.date
-        )
-    }
-
-    // MARK: - HealthKit queries
-
-    private func latestSample(
-        _ identifier: HKQuantityTypeIdentifier,
-        unit: HKUnit,
-        within window: TimeInterval
-    ) async -> (value: Double, date: Date)? {
-        await samples(identifier, unit: unit, within: window, limit: 1).first
-    }
-
-    private func samples(
-        _ identifier: HKQuantityTypeIdentifier,
-        unit: HKUnit,
-        within window: TimeInterval,
-        limit: Int
-    ) async -> [(value: Double, date: Date)] {
-        let type = HKQuantityType(identifier)
-        let predicate = HKQuery.predicateForSamples(
-            withStart: Date().addingTimeInterval(-window),
-            end: Date(),
-            options: .strictEndDate
-        )
-        let sort = NSSortDescriptor(key: HKSampleSortIdentifierEndDate, ascending: false)
-
-        return await withCheckedContinuation { continuation in
-            let query = HKSampleQuery(
-                sampleType: type,
-                predicate: predicate,
-                limit: limit,
-                sortDescriptors: [sort]
-            ) { _, samples, _ in
-                let values = (samples as? [HKQuantitySample] ?? []).map {
-                    (value: $0.quantity.doubleValue(for: unit), date: $0.endDate)
-                }
-                continuation.resume(returning: values)
-            }
-            store.execute(query)
-        }
+        reading = updated
     }
 
     // MARK: - Demo mode
@@ -308,9 +213,4 @@ extension VitalsCollector: HKWorkoutSessionDelegate {
             self?.isMonitoring = false
         }
     }
-}
-
-private extension TimeInterval {
-    static func hours(_ count: Double) -> TimeInterval { count * 3600 }
-    static func days(_ count: Double) -> TimeInterval { count * 86_400 }
 }

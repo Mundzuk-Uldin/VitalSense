@@ -5,13 +5,19 @@ and your iPhone shows you the answer and the reasoning behind it.
 
 **Everything runs on the device.** The trained model is a 17 KB Core ML graph
 in the app bundle — no server, no network request, no account. Readings never
-leave your wrist and your phone.
+leave your phone.
+
+**The iPhone app works on its own.** An Apple Watch writes heart rate, blood
+oxygen, respiratory rate and wrist temperature into the Health database and
+they sync to the phone automatically, so the iPhone reads everything the
+watch measured *without a watch app installed*. The watch app is an optional
+extra that adds live, second-by-second heart rate while monitoring.
 
 | Piece | What it does |
 |---|---|
 | `model/` | Trains a fastai tabular model on `Health_Risk_Dataset.csv` and exports it to Core ML |
-| `app/VitalSenseWatch/` | watchOS app: reads the sensors, scores on the watch, shows the band |
-| `app/VitalSense/` | iOS app: fills in what the watch cannot measure, and shows the full result |
+| `app/VitalSense/` | iOS app — reads Health, scores on-device, shows the result. This is the product. |
+| `app/VitalSenseWatch/` | watchOS app — optional; live heart rate and a score on the wrist |
 
 > **Not a medical device.** This is a demonstration built on a synthetic
 > dataset. Nothing here should inform a care decision.
@@ -238,29 +244,31 @@ inside the app.
 ### 1. Make the project yours to sign
 
 Bundle IDs are globally unique to Apple, so two people cannot both ship
-`com.bayhacks.VitalSense`. In Xcode, for **each** of the two targets →
-Signing & Capabilities:
+`com.bayhacks.VitalSense`. **Do not change them in Xcode's Signing pane** —
+that writes a literal into the project, and the bundle ID has to match in
+three places that then drift apart. Instead:
 
-- Tick **Automatically manage signing** and pick your Team (a free Apple ID is fine)
-- iOS target bundle ID → `com.yourname.VitalSense`
-- Watch target bundle ID → `com.yourname.VitalSense.watchkitapp`
+```bash
+cp app/Config/Local.xcconfig.example app/Config/Local.xcconfig
+```
 
-The watch ID must be the iOS ID plus `.watchkitapp`, or the watch app will
-not install. Then edit `app/VitalSenseWatch/Info.plist` and set
-`WKCompanionAppBundleIdentifier` to your new iOS bundle ID — that one is not
-automatic.
+Edit those two lines:
 
-Add the **HealthKit** capability to the *watch* target only (+ Capability →
-HealthKit). The iPhone app never touches HealthKit.
+```
+VITALSENSE_BUNDLE_PREFIX = com.yourname
+VITALSENSE_DEVELOPMENT_TEAM = YOURTEAMID
+```
 
-> These edits are personal to your machine. Please don't commit them to
-> `main` — they would break everyone else's signing. `git update-index
-> --skip-worktree app/VitalSense.xcodeproj/project.pbxproj` after you have
-> them set is the easy way to stop them showing up in `git status`.
+Everything derives from that — the iPhone bundle ID, the watch bundle ID and
+the watch's companion key — so they cannot disagree. `Local.xcconfig` is
+git-ignored, so your settings stay yours and nobody else's signing breaks.
+Your team ID is in Xcode → Settings → Accounts.
 
-> Re-running `tools/generate_xcodeproj.py` rebuilds the project from
-> scratch and **wipes your signing settings and the HealthKit entitlement**.
-> Only run it if you add new Swift files.
+The HealthKit entitlement and the Health usage strings are already in the
+project; there is no capability to add by hand.
+
+> Re-running `tools/generate_xcodeproj.py` is now safe — it reads your
+> settings from `Local.xcconfig` rather than storing them in the project.
 
 ### 2. Trust the hardware
 
@@ -271,18 +279,23 @@ HealthKit). The iPhone app never touches HealthKit.
 
 ### 3. Build
 
-Scheme **VitalSense** → your iPhone as destination → ⌘R. The watch app is
-embedded in the iPhone app and installs with it; if it does not appear within
-a minute, iPhone → Watch app → VitalSense → **Install**.
+Scheme **VitalSense** → your iPhone as destination → ⌘R. Grant Health access
+when asked, then tap **Read from Health** (top left). That is the whole
+product.
 
-On the watch: Controls → **Start monitoring**, grant Health access, then
-Result → **Read & Score**.
+**The watch app is not built or embedded by default.** It is a separate
+scheme you can run on its own, and shipping it inside the iPhone app is one
+flag — `EMBED_WATCH_APP = True` in `tools/generate_xcodeproj.py`. It is off
+because an iPhone install fails outright if anything about the watch target
+is misconfigured, which is a bad trade for an optional feature.
 
-### What to expect on a real wrist
+### What to expect with a real watch
 
 Probably "3 of 4 measured", with blood oxygen showing *Assumed normal*. That
 is not a bug — see the sensor table above. Respiratory rate and wrist
 temperature are sleep-derived, so a watch you only put on this morning has
-neither yet. The watch's Controls page has demo readings that exercise the
-real model end to end if you need to show the whole thing working
-immediately.
+neither yet.
+
+In the Simulator there is no Health data at all, so every vital reads as
+*assumed*. **Settings → Score a demo reading** runs a plausible reading
+through the real Core ML model, which is what to use for a demo.

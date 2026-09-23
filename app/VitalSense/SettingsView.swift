@@ -19,7 +19,15 @@ struct SettingsView: View {
                     Text("The model runs inside the app. There is no server, no network request and no account — readings never leave your devices.")
                 }
 
-                Section("Apple Watch") {
+                Section {
+                    Text("Your Apple Watch syncs heart rate, blood oxygen, respiratory rate and wrist temperature to the Health app, and this app reads them from there. The watch app is optional — it adds live heart rate while monitoring.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                } header: {
+                    Text("Where readings come from")
+                }
+
+                Section("Apple Watch app (optional)") {
                     LabeledContent("Paired", value: store.connectivity.isWatchPaired ? "Yes" : "No")
                     LabeledContent("App installed", value: store.connectivity.isWatchAppInstalled ? "Yes" : "No")
                     LabeledContent("Reachable", value: store.connectivity.isReachable ? "Yes" : "No")
@@ -32,7 +40,7 @@ struct SettingsView: View {
 
                 Section {
                     Button("Score a demo reading") {
-                        Task { await store.score(.demo(risk: "High")) }
+                        store.score(.demo(risk: "High"))
                     }
                 } footer: {
                     Text("Sends a plausible high-risk reading through the same path a watch reading takes. Useful when no watch is paired.")

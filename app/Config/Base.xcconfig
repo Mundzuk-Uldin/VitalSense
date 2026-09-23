@@ -1,0 +1,14 @@
+// Shared build settings.
+//
+// Everything personal -- your bundle ID prefix and your Apple developer team
+// -- lives in Local.xcconfig, which is git-ignored. Copy the example file and
+// edit that; never edit this one, and never change the bundle ID in Xcode's
+// Signing & Capabilities pane, because that writes a literal into the project
+// and the three places it has to match will drift apart.
+
+// The default. Overridden by Local.xcconfig if you have one.
+VITALSENSE_BUNDLE_PREFIX = com.bayhacks
+VITALSENSE_DEVELOPMENT_TEAM =
+
+// Optional, so a fresh clone builds for the Simulator with no setup at all.
+#include? "Local.xcconfig"
