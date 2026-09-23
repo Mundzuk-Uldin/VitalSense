@@ -6,7 +6,11 @@
 // Signing & Capabilities pane, because that writes a literal into the project
 // and the three places it has to match will drift apart.
 
-// The default. Overridden by Local.xcconfig if you have one.
+// Defaults. Fine for the Simulator, which does not register anything with
+// Apple. Building to a REAL DEVICE requires your own Local.xcconfig: App IDs
+// are claimed first-come across all of Apple, so a shared prefix works for
+// exactly one team and fails for everyone else with "cannot be registered to
+// your development team because it is not available".
 VITALSENSE_BUNDLE_PREFIX = com.bayhacks
 VITALSENSE_DEVELOPMENT_TEAM =
 
