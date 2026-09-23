@@ -54,49 +54,77 @@ final class RiskStore: ObservableObject {
 
         loadHistory()
 
-        // The watch scores its own readings and sends the result along, so
-        // the phone usually only records. It re-scores when the watch could
-        // not, or when the manual vitals change.
-        connectivity.onReadingReceived = { [weak self] reading, prediction in
-            guard let self else { return nil }
-            if let prediction {
-                self.record(ScoredReading(reading: reading, prediction: prediction, failure: nil))
-                return prediction
-            }
-            return self.score(reading)
+        // The watch scores its own reading so the wrist gets an instant
+        // answer, but the phone scores it again before recording: only the
+        // phone knows the manually entered blood pressure and ACVPU, and a
+        // watch reading carries the assumed defaults for both. Scoring is
+        // local and takes about a millisecond, so there is no reason to
+        // trust the watch's copy over a fresh one.
+        connectivity.onReadingReceived = { [weak self] reading, watchPrediction in
+            self?.ingest(reading, watchPrediction: watchPrediction)
         }
         connectivity.activate()
     }
 
     // MARK: - Scoring
 
-    /// Fill in the vitals the watch could not measure, ask the model, and
-    /// record the result.
+    /// Fill in the vitals the watch could not measure and ask the model,
+    /// without recording anything. Kept separate from `score` so a caller
+    /// can decide what to do with a failure before it lands in the history.
+    private func evaluate(
+        _ reading: VitalsReading
+    ) -> (reading: VitalsReading, result: Result<RiskPrediction, Error>) {
+        let completed = applyManualVitals(to: reading)
+        guard let scorer else {
+            return (completed, .failure(RiskScorer.Failure.modelMissing))
+        }
+        return (completed, Result { try scorer.score(completed) })
+    }
+
+    /// Score a reading and record it.
     @discardableResult
     func score(_ reading: VitalsReading) -> RiskPrediction? {
         isScoring = true
         defer { isScoring = false }
 
-        let completed = applyManualVitals(to: reading)
-
-        guard let scorer else {
-            record(ScoredReading(
-                reading: completed, prediction: nil,
-                failure: modelError ?? "The risk model is unavailable."
-            ))
-            return nil
-        }
-
-        do {
-            let prediction = try scorer.score(completed)
+        let (completed, result) = evaluate(reading)
+        switch result {
+        case .success(let prediction):
             record(ScoredReading(reading: completed, prediction: prediction, failure: nil))
             return prediction
-        } catch {
+        case .failure(let error):
             record(ScoredReading(
                 reading: completed, prediction: nil, failure: error.localizedDescription
             ))
             return nil
         }
+    }
+
+    /// Record a reading that arrived from the watch.
+    ///
+    /// The phone's own score wins, because it is the only one that accounts
+    /// for the manual vitals. The watch's answer is the fallback for the one
+    /// case where the phone cannot score at all -- its model failed to load
+    /// -- so a reading is never lost just because this device is broken.
+    private func ingest(
+        _ reading: VitalsReading, watchPrediction: RiskPrediction?
+    ) -> RiskPrediction? {
+        let (completed, result) = evaluate(reading)
+
+        if case .success(let prediction) = result {
+            record(ScoredReading(reading: completed, prediction: prediction, failure: nil))
+            return prediction
+        }
+        if let watchPrediction {
+            record(ScoredReading(reading: completed, prediction: watchPrediction, failure: nil))
+            return watchPrediction
+        }
+        if case .failure(let error) = result {
+            record(ScoredReading(
+                reading: completed, prediction: nil, failure: error.localizedDescription
+            ))
+        }
+        return nil
     }
 
     /// Re-run the most recent reading. Used after the manual vitals change,
